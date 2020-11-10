@@ -1,0 +1,12 @@
+javac -d destDir *.java
+
+rmiregistry &
+
+servidor
+java -classpath destDir -Djava.rmi.server.codebase=file:destDir/ com.mycompany.proyectodistri.middlewares.Server &
+
+cliente
+java -classpath destDir com.mycompany.proyectodistri.middlewares.Client
+
+
+
