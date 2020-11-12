@@ -184,6 +184,8 @@ public class JFramePrueba extends javax.swing.JFrame {
         } 
         catch (ExecutionException ex) {
             Logger.getLogger(JFramePrueba.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(JFramePrueba.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         /*

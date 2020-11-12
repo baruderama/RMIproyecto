@@ -37,6 +37,7 @@ public class Server implements Int {
 
             // Bind the remote object's stub in the registry
             Registry registry = LocateRegistry.createRegistry(1083);
+            
             registry.bind("Hello", stub);
 
             System.err.println("Server ready");
