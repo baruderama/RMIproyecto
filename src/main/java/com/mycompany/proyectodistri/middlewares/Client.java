@@ -49,6 +49,7 @@ public class Client {
         
         try{
             Registry registry;
+
             registry = LocateRegistry.getRegistry("192.168.0.16",1083);//REMOTO
             //registry = LocateRegistry.getRegistry(1083); //LOCAL
             Int stub = (Int) registry.lookup("Hello");
