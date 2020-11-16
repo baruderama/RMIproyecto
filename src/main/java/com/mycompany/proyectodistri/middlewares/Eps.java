@@ -5,11 +5,15 @@
  */
 package com.mycompany.proyectodistri.middlewares;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author baru
  */
-public class Eps {
+public class Eps implements Serializable{
     public String nombreDeusuario;
     public String contraseña;
 
@@ -33,6 +37,9 @@ public class Eps {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+    
+    
+    
     
     
     

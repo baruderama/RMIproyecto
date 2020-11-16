@@ -5,6 +5,14 @@
  */
 package com.mycompany.proyectodistri.middlewares;
 
+import static com.mycompany.proyectodistri.middlewares.JFrameEps.secretkey;
+import java.rmi.RemoteException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author fede1
@@ -14,8 +22,21 @@ public class JFramePaciente extends javax.swing.JFrame {
     /**
      * Creates new form JFramePaciente
      */
-    public JFramePaciente() {
+    
+    final static String secretkey="silencio!!";
+    public JFramePaciente() throws RemoteException {
         initComponents();
+        
+        try{
+            FirebaseConnection.conectar();
+        }catch(Exception e){
+            
+        }
+        
+        Int stub=Client.conectar();
+        stub.getlistaEps().forEach(_item -> {
+            jComboBox1.addItem(AesAlgorithm.decrypt(_item.nombreDeusuario, secretkey));
+        });
     }
 
     /**
@@ -34,15 +55,17 @@ public class JFramePaciente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextFieldUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldContrasena = new javax.swing.JTextField();
         jButtonAutenticar = new javax.swing.JButton();
+        jPasswordField2 = new javax.swing.JPasswordField();
         jPanelRegistro = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldUsuario1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldContrasena1 = new javax.swing.JTextField();
         jButtonAutenticar1 = new javax.swing.JButton();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,12 +95,6 @@ public class JFramePaciente extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Contraseña");
 
-        jTextFieldContrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldContrasenaActionPerformed(evt);
-            }
-        });
-
         jButtonAutenticar.setText("Iniciar Sesión");
         jButtonAutenticar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,11 +116,11 @@ public class JFramePaciente extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanelSesionLayout.createSequentialGroup()
-                        .addGroup(jPanelSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextFieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonAutenticar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonAutenticar, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(jPasswordField2))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanelSesionLayout.setVerticalGroup(
@@ -118,10 +135,10 @@ public class JFramePaciente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonAutenticar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jTabbedPanePaciente.addTab("Iniciar Sesión", jPanelSesion);
@@ -141,18 +158,20 @@ public class JFramePaciente extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Ingrese contraseña:");
 
-        jTextFieldContrasena1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldContrasena1ActionPerformed(evt);
-            }
-        });
-
         jButtonAutenticar1.setText("Registrar");
         jButtonAutenticar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAutenticar1ActionPerformed(evt);
             }
         });
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("EPS");
 
         javax.swing.GroupLayout jPanelRegistroLayout = new javax.swing.GroupLayout(jPanelRegistro);
         jPanelRegistro.setLayout(jPanelRegistroLayout);
@@ -168,12 +187,20 @@ public class JFramePaciente extends javax.swing.JFrame {
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanelRegistroLayout.createSequentialGroup()
-                        .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextFieldContrasena1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonAutenticar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jTextFieldUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelRegistroLayout.createSequentialGroup()
+                        .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonAutenticar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52))
+                    .addGroup(jPanelRegistroLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addGap(102, 102, 102))))
         );
         jPanelRegistroLayout.setVerticalGroup(
             jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,12 +212,16 @@ public class JFramePaciente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldContrasena1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonAutenticar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jTabbedPanePaciente.addTab("Registro de Usuario", jPanelRegistro);
@@ -216,12 +247,13 @@ public class JFramePaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAutenticarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAutenticarActionPerformed
-
+        String usuario = jTextFieldUsuario.getText();
+        char[] contrasena = jPasswordField2.getPassword();
+        //Paciente paciente = new Paciente(usuario, contrasena);
+        
+        Int stub=Client.conectar();
+        //stub.setPacientes(paciente);
     }//GEN-LAST:event_jButtonAutenticarActionPerformed
-
-    private void jTextFieldContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldContrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldContrasenaActionPerformed
 
     private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
         // TODO add your handling code here:
@@ -231,15 +263,46 @@ public class JFramePaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldUsuario1ActionPerformed
 
-    private void jTextFieldContrasena1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldContrasena1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldContrasena1ActionPerformed
-
     private void jButtonAutenticar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAutenticar1ActionPerformed
-        String usuario = jTextFieldUsuario.getText();
-        String contrasena = jTextFieldContrasena.getText();
-        Paciente paciente = new Paciente(usuario, contrasena);
+        String usuario = jTextFieldUsuario1.getText();
+        char[] contrasena = jPasswordField1.getPassword();
+        String eps= (String) jComboBox1.getSelectedItem();
+        HashPassword passwordManager= new HashPassword(3);
+        
+        
+        String hashPassword;
+        boolean in=false;
+        try {
+            hashPassword=passwordManager.hash(contrasena);
+            System.out.println(hashPassword);
+            
+            String usuarioEncript=AesAlgorithm.encrypt(usuario, secretkey);
+            String epsCript=AesAlgorithm.encrypt(eps, secretkey);
+            System.out.println(usuario);
+            System.out.println(epsCript);
+            
+            
+            Map<String,Object> data= new HashMap<>();
+            data.put("usuario",usuarioEncript);
+            data.put("contrasena",hashPassword);
+            data.put("eps",epsCript);
+            String uid= java.util.UUID.randomUUID().toString();
+            System.out.println("que paso?");
+        
+            FirebaseConnection.insertarDatos("Pacientes", uid, data);
+        //Paciente paciente = new Paciente(usuario, contrasena);
+        } catch (InvalidKeySpecException ex) {
+            Logger.getLogger(JFramePaciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
     }//GEN-LAST:event_jButtonAutenticar1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,7 +334,11 @@ public class JFramePaciente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFramePaciente().setVisible(true);
+                try {
+                    new JFramePaciente().setVisible(true);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(JFramePaciente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -279,18 +346,20 @@ public class JFramePaciente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAutenticar;
     private javax.swing.JButton jButtonAutenticar1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelRegistro;
     private javax.swing.JPanel jPanelSesion;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTabbedPane jTabbedPanePaciente;
-    private javax.swing.JTextField jTextFieldContrasena;
-    private javax.swing.JTextField jTextFieldContrasena1;
     private javax.swing.JTextField jTextFieldUsuario;
     private javax.swing.JTextField jTextFieldUsuario1;
     // End of variables declaration//GEN-END:variables
