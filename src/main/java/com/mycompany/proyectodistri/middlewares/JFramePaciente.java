@@ -298,6 +298,7 @@ public class JFramePaciente extends javax.swing.JFrame {
         HashPassword passwordManager= new HashPassword(3);
         
         
+        
         String hashPassword;
         boolean in=false;
         try {
