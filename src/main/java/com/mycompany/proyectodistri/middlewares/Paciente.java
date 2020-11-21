@@ -5,15 +5,18 @@
  */
 package com.mycompany.proyectodistri.middlewares;
 
+
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
+import java.io.Serializable;
+
 
 /**
  *
  * @author federico
  */
-public class Paciente {
+public class Paciente implements Serializable{
     private String usuario;
     private char[] contrasena;
     private ArrayList<IPS> instituciones;

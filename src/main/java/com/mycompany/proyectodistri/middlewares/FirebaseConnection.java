@@ -19,6 +19,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ public class FirebaseConnection extends Server {
     
     static Firestore bd;
     static List<Pruebita> listaNombresPruebas = new ArrayList<Pruebita>(); 
+    static List<Eps> listaEps=new ArrayList<Eps>();
 
     public static void conectar() throws FileNotFoundException, IOException {
 
@@ -53,12 +55,15 @@ public class FirebaseConnection extends Server {
     
     public static boolean insertarDatos(String collecion,String documento,Map<String,Object> data){
         try{
+            
             DocumentReference docref=bd.collection(collecion).document(documento);
+            System.err.println("por aquíii");
             ApiFuture<WriteResult> result= docref.set(data);
             System.out.println("Update time: "+ result.get().getUpdateTime() );
+            
             return false;
         }catch (Exception e){
-            
+            System.err.println(e);
         }
         return false;
    
@@ -95,8 +100,121 @@ public class FirebaseConnection extends Server {
     public static void setListaNombresPruebas(List<Pruebita> listaNombresPruebas) {
         FirebaseConnection.listaNombresPruebas = listaNombresPruebas;
     }
+    
+    public static List<Eps> buscarEPS()throws InterruptedException,ExecutionException, RemoteException{
+         System.out.println("la vida");
+         CollectionReference eps= bd.collection("EPS");
+         ApiFuture<QuerySnapshot> querySnapshot= eps.get();
+         
+         for(DocumentSnapshot document: querySnapshot.get().getDocuments()){
+             //String numAux=String.valueOf(document.getString("numero"));
+             //int num=Integer.parseInt(numAux);
+             Eps epsCopia= new Eps(
+             //document.getId(),
+             document.getString("usuario"),
+             document.getString("contrasena")
+             
+             
+             );
+             listaEps.add(epsCopia);
+             Int stub=Client.conectar();
+             Server.listaEpsActivas.add(epsCopia);
+             stub.setListaEps(listaEps);
+             //System.out.println(document.getId());
+             //System.out.println(Server.listaNombresPruebas.get(0).getNombre());
+         }
+         return listaEps;
+    }
+    
+    public static Peticiones buscarVac1()throws InterruptedException,ExecutionException, RemoteException{
+         System.out.println("la vida");
+         CollectionReference peti= bd.collection("vacuna1");
+         ApiFuture<QuerySnapshot> querySnapshot= peti.get();
+         List<Peticiones> listaP=new ArrayList<Peticiones>();
+         Peticiones peCopia= new Peticiones();
+         
+         for(DocumentSnapshot document: querySnapshot.get().getDocuments()){
+             //String numAux=String.valueOf(document.getString("numero"));
+             //int num=Integer.parseInt(numAux);
+             //Peticiones peCopia= new Peticiones();
+             //document.getId(),
+             
+             peCopia.setCantidadVacuna(document.getString("cantidad"));
+             peCopia.setCantidadVacuna( document.getString("tipo"));
+             
+            
+             
+             
+             //listaEps.add(epsCopia);
+             //Int stub=Client.conectar();
+             //Server.listaEpsActivas.add(epsCopia);
+             //stub.setListaEps(listaEps);
+             //System.out.println(document.getId());
+             //System.out.println(Server.listaNombresPruebas.get(0).getNombre());
+         }
+         return peCopia;
+    }
+    
+     public static Peticiones buscarVac2()throws InterruptedException,ExecutionException, RemoteException{
+         System.out.println("la vida");
+         CollectionReference peti= bd.collection("vacuna2");
+         ApiFuture<QuerySnapshot> querySnapshot= peti.get();
+         List<Peticiones> listaP=new ArrayList<Peticiones>();
+         Peticiones peCopia= new Peticiones();
+         
+         for(DocumentSnapshot document: querySnapshot.get().getDocuments()){
+             //String numAux=String.valueOf(document.getString("numero"));
+             //int num=Integer.parseInt(numAux);
+             //Peticiones peCopia= new Peticiones();
+             //document.getId(),
+             
+             peCopia.setCantidadVacuna(document.getString("cantidad"));
+             peCopia.setCantidadVacuna( document.getString("tipo"));
+             
+            
+             
+             
+             //listaEps.add(epsCopia);
+             //Int stub=Client.conectar();
+             //Server.listaEpsActivas.add(epsCopia);
+             //stub.setListaEps(listaEps);
+             //System.out.println(document.getId());
+             //System.out.println(Server.listaNombresPruebas.get(0).getNombre());
+         }
+         return peCopia;
+    }
      
-     
-     
+      public static Peticiones buscarVac3()throws InterruptedException,ExecutionException, RemoteException{
+         System.out.println("la vida");
+         CollectionReference peti= bd.collection("vacuna3");
+         ApiFuture<QuerySnapshot> querySnapshot= peti.get();
+         List<Peticiones> listaP=new ArrayList<Peticiones>();
+         Peticiones peCopia= new Peticiones();
+         
+         for(DocumentSnapshot document: querySnapshot.get().getDocuments()){
+             //String numAux=String.valueOf(document.getString("numero"));
+             //int num=Integer.parseInt(numAux);
+             //Peticiones peCopia= new Peticiones();
+             //document.getId(),
+             
+             peCopia.setCantidadVacuna(document.getString("cantidad"));
+             peCopia.setCantidadVacuna( document.getString("tipo"));
+             
+            
+             
+             
+             //listaEps.add(epsCopia);
+             //Int stub=Client.conectar();
+             //Server.listaEpsActivas.add(epsCopia);
+             //stub.setListaEps(listaEps);
+             //System.out.println(document.getId());
+             //System.out.println(Server.listaNombresPruebas.get(0).getNombre());
+         }
+         return peCopia;
+    }
+      
+    
+    
+         
       
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.mycompany.proyectodistri.middlewares;
+import java.io.Serializable;
 import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.RemoteException;
@@ -21,6 +22,8 @@ import java.util.logging.Logger;
 public class Server implements Int {
     
     public static List<Pruebita> listaNombresPruebas = new ArrayList<Pruebita>();
+    public static List<Eps> listaEpsActivas= new ArrayList<Eps>();
+    public static String actualEps;
      public Server() {}
 
      @Override
@@ -75,6 +78,26 @@ public class Server implements Int {
     public void setLista(List<Pruebita> lista) throws RemoteException {
         listaNombresPruebas=lista;
     }
+    
+
+
+    @Override
+    public void setListaEps(List<Eps> eps) throws RemoteException {
+        listaEpsActivas=eps;
+    }
+
+    @Override
+    public List<Eps> getlistaEps() {
+        return listaEpsActivas; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void entregarListaPeticiones(List<Peticiones> p) throws RemoteException {
+        Eps.obtenerPeticiones(p);
+        System.out.println("entra2");
+    }
+    
+    
 
     
     

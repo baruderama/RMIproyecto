@@ -20,6 +20,17 @@ public interface Int extends Remote{
     public List<Pruebita> buscarPruebita()throws RemoteException;
     
     public void setLista(List<Pruebita> lista)throws RemoteException;
+    
+    public void setListaEps(List<Eps> eps)throws RemoteException;
+    
+    public List<Eps> getlistaEps() throws RemoteException;
+    
+    public void entregarListaPeticiones(List<Peticiones> p)throws RemoteException;
+    
+    //public boolean pacienteGuardar(Paciente paciente);
+    
+    
+    
            
     
     
