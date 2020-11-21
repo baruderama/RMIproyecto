@@ -86,11 +86,12 @@ public class Eps implements Serializable{
          
          if(cant1<=cant1Bd)
              conf1=true;
-         if(cant1<=cant2Bd)
+         if(cant2<=cant2Bd)
              conf2=true;
-         if(cant1<=cant3Bd)
+         if(cant3<=cant3Bd){
              conf3=true;
-         
+             
+         }
          String cant1String=String.valueOf(cant1);
          String cant2String=String.valueOf(cant2);
          String cant3String=String.valueOf(cant3);
@@ -122,6 +123,8 @@ public class Eps implements Serializable{
              transaccion.add(pAux);
          }else{
              Peticiones pAux=new Peticiones();
+             pAux.setCantidadVacuna("0");
+             pAux.setTipoVacuna("3");
              transaccion.add(pAux);
          }
          
