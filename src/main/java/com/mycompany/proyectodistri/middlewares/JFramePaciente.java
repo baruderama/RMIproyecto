@@ -59,18 +59,22 @@ public class JFramePaciente extends javax.swing.JFrame {
         jTextFieldUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButtonAutenticar = new javax.swing.JButton();
+
         jPasswordField2 = new javax.swing.JPasswordField();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+
         jPanelRegistro = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldUsuario1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jButtonAutenticar1 = new javax.swing.JButton();
+
         jPasswordField1 = new javax.swing.JPasswordField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
+
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,8 +106,10 @@ public class JFramePaciente extends javax.swing.JFrame {
 
         jButtonAutenticar.setText("Iniciar Sesión");
         jButtonAutenticar.addActionListener(new java.awt.event.ActionListener() {
+
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAutenticarActionPerformed(evt);
+                jPasswordField1ActionPerformed(evt);
             }
         });
 
@@ -126,6 +132,7 @@ public class JFramePaciente extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(jPanelSesionLayout.createSequentialGroup()
                         .addGroup(jPanelSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+
                             .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(jLabel3)
                             .addComponent(jButtonAutenticar, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
@@ -138,6 +145,7 @@ public class JFramePaciente extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSesionLayout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(81, 81, 81))))))
+
         );
         jPanelSesionLayout.setVerticalGroup(
             jPanelSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,6 +163,7 @@ public class JFramePaciente extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+
                 .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonAutenticar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,6 +194,7 @@ public class JFramePaciente extends javax.swing.JFrame {
             }
         });
 
+
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -207,6 +217,7 @@ public class JFramePaciente extends javax.swing.JFrame {
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanelRegistroLayout.createSequentialGroup()
+
                         .addComponent(jTextFieldUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanelRegistroLayout.createSequentialGroup()
@@ -221,6 +232,7 @@ public class JFramePaciente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addGap(102, 102, 102))))
+
         );
         jPanelRegistroLayout.setVerticalGroup(
             jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,12 +248,14 @@ public class JFramePaciente extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+
                 .addGroup(jPanelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonAutenticar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
+
         );
 
         jTabbedPanePaciente.addTab("Registro de Usuario", jPanelRegistro);
@@ -292,6 +306,7 @@ public class JFramePaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldUsuario1ActionPerformed
 
     private void jButtonAutenticar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAutenticar1ActionPerformed
+
         String usuario = jTextFieldUsuario1.getText();
         char[] contrasena = jPasswordField1.getPassword();
         String eps= (String) jComboBox1.getSelectedItem();
@@ -331,6 +346,7 @@ public class JFramePaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -375,6 +391,7 @@ public class JFramePaciente extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAutenticar;
     private javax.swing.JButton jButtonAutenticar1;
     private javax.swing.JComboBox<String> jComboBox1;
+
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -383,6 +400,7 @@ public class JFramePaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelRegistro;
