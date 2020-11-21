@@ -23,6 +23,7 @@ public class Server implements Int {
     
     public static List<Pruebita> listaNombresPruebas = new ArrayList<Pruebita>();
     public static List<Eps> listaEpsActivas= new ArrayList<Eps>();
+    public static String actualEps;
      public Server() {}
 
      @Override
@@ -88,6 +89,12 @@ public class Server implements Int {
     @Override
     public List<Eps> getlistaEps() {
         return listaEpsActivas; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void entregarListaPeticiones(List<Peticiones> p) throws RemoteException {
+        Eps.obtenerPeticiones(p);
+        System.out.println("entra2");
     }
     
     

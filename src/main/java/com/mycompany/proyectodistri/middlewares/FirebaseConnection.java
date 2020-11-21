@@ -125,6 +125,96 @@ public class FirebaseConnection extends Server {
          }
          return listaEps;
     }
+    
+    public static Peticiones buscarVac1()throws InterruptedException,ExecutionException, RemoteException{
+         System.out.println("la vida");
+         CollectionReference peti= bd.collection("vacuna1");
+         ApiFuture<QuerySnapshot> querySnapshot= peti.get();
+         List<Peticiones> listaP=new ArrayList<Peticiones>();
+         Peticiones peCopia= new Peticiones();
+         
+         for(DocumentSnapshot document: querySnapshot.get().getDocuments()){
+             //String numAux=String.valueOf(document.getString("numero"));
+             //int num=Integer.parseInt(numAux);
+             //Peticiones peCopia= new Peticiones();
+             //document.getId(),
+             
+             peCopia.setCantidadVacuna(document.getString("cantidad"));
+             peCopia.setCantidadVacuna( document.getString("tipo"));
+             
+            
+             
+             
+             //listaEps.add(epsCopia);
+             //Int stub=Client.conectar();
+             //Server.listaEpsActivas.add(epsCopia);
+             //stub.setListaEps(listaEps);
+             //System.out.println(document.getId());
+             //System.out.println(Server.listaNombresPruebas.get(0).getNombre());
+         }
+         return peCopia;
+    }
+    
+     public static Peticiones buscarVac2()throws InterruptedException,ExecutionException, RemoteException{
+         System.out.println("la vida");
+         CollectionReference peti= bd.collection("vacuna2");
+         ApiFuture<QuerySnapshot> querySnapshot= peti.get();
+         List<Peticiones> listaP=new ArrayList<Peticiones>();
+         Peticiones peCopia= new Peticiones();
+         
+         for(DocumentSnapshot document: querySnapshot.get().getDocuments()){
+             //String numAux=String.valueOf(document.getString("numero"));
+             //int num=Integer.parseInt(numAux);
+             //Peticiones peCopia= new Peticiones();
+             //document.getId(),
+             
+             peCopia.setCantidadVacuna(document.getString("cantidad"));
+             peCopia.setCantidadVacuna( document.getString("tipo"));
+             
+            
+             
+             
+             //listaEps.add(epsCopia);
+             //Int stub=Client.conectar();
+             //Server.listaEpsActivas.add(epsCopia);
+             //stub.setListaEps(listaEps);
+             //System.out.println(document.getId());
+             //System.out.println(Server.listaNombresPruebas.get(0).getNombre());
+         }
+         return peCopia;
+    }
+     
+      public static Peticiones buscarVac3()throws InterruptedException,ExecutionException, RemoteException{
+         System.out.println("la vida");
+         CollectionReference peti= bd.collection("vacuna3");
+         ApiFuture<QuerySnapshot> querySnapshot= peti.get();
+         List<Peticiones> listaP=new ArrayList<Peticiones>();
+         Peticiones peCopia= new Peticiones();
+         
+         for(DocumentSnapshot document: querySnapshot.get().getDocuments()){
+             //String numAux=String.valueOf(document.getString("numero"));
+             //int num=Integer.parseInt(numAux);
+             //Peticiones peCopia= new Peticiones();
+             //document.getId(),
+             
+             peCopia.setCantidadVacuna(document.getString("cantidad"));
+             peCopia.setCantidadVacuna( document.getString("tipo"));
+             
+            
+             
+             
+             //listaEps.add(epsCopia);
+             //Int stub=Client.conectar();
+             //Server.listaEpsActivas.add(epsCopia);
+             //stub.setListaEps(listaEps);
+             //System.out.println(document.getId());
+             //System.out.println(Server.listaNombresPruebas.get(0).getNombre());
+         }
+         return peCopia;
+    }
+      
+    
+    
          
       
 }

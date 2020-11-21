@@ -5,11 +5,13 @@
  */
 package com.mycompany.proyectodistri.middlewares;
 
+import java.io.Serializable;
+
 /**
  *
  * @author federico
  */
-public class Paciente {
+public class Paciente implements Serializable{
     private String usuario;
     private String contrasena;
 
