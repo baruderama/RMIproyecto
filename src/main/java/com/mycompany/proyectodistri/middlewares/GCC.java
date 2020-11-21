@@ -10,7 +10,7 @@ import java.util.Queue;
 
 /**
  *
- * @author fede1
+ * @author federico
  */
 public class GCC {
     Queue<Transaccion> transacciones;
@@ -23,10 +23,10 @@ public class GCC {
     
     public void distribuir() {
         
-        Transaccion transaccion = transacciones.poll();
+        /*Transaccion transaccion = transacciones.poll();
         
         if(transaccion==null)
-            System.out.println("No hay transacciones en la cola!");
+            System.out.println("No hay transacciones en la cola!");*/
         
         rand = (int) Math.random()*2;
         String nombre = null;
@@ -35,12 +35,13 @@ public class GCC {
             nombre = "ips1";
         if(rand == 1)
             nombre = "ips2";
-        if(nombre!=null)
+        /*if(nombre!=null && transaccion!=null)
             ips = transaccion.getPaciente().buscarIPS(nombre);
         else
-            System.out.println("Error al buscar la IPS");
+            System.out.println("Error al buscar la IPS");*/
         
-        ips.getTransacciones().add(transaccion);
+        
+        
         System.out.println("Éxito");
     }
 }

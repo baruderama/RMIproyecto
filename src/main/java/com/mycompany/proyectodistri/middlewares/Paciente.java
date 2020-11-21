@@ -27,13 +27,9 @@ public class Paciente {
     }
     
     public void crearTransaccion(int vacunas, String laboratorio, GCC gcc) {
-        try {
-            Transaccion transaccion = new Transaccion(this, vacunas, laboratorio, gcc);
-            transaccion.start();
-            transaccion.join();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Paciente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Transaccion transaccion = new Transaccion(this, vacunas, laboratorio, gcc);
+        gcc.transacciones.add(transaccion);
+        transaccion.start();
     }
     
     public IPS buscarIPS(String nombre){

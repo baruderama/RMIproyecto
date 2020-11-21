@@ -5,37 +5,39 @@
  */
 package com.mycompany.proyectodistri.middlewares;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
 /**
  *
- * @author fede1
+ * @author federico
  */
 public class IPS {
     String nombre;
-    Queue<Transaccion> transacciones;
+    ArrayList<Vacuna> vacunas;
 
     public IPS(String nombre) {
         this.nombre = nombre;
-        this.transacciones = new LinkedList<Transaccion>();
-    }   
+        this.vacunas = vacunas = new ArrayList<>();
+    }
 
     public String getNombre() {
         return nombre;
-    }
-
-    public Queue<Transaccion> getTransacciones() {
-        return transacciones;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setTransacciones(Queue<Transaccion> transacciones) {
-        this.transacciones = transacciones;
+    public ArrayList<Vacuna> getVacunas() {
+        return vacunas;
     }
+
+    public void setVacunas(ArrayList<Vacuna> vacunas) {
+        this.vacunas = vacunas;
+    }
+    
     
     
 }

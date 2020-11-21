@@ -24,7 +24,7 @@ public class Transaccion extends Thread{
     }
     
     public void run(){       
-        gcc.transacciones.add(this);
+        gcc.distribuir();
         System.out.println("Inicia el hilo de la transaccion");
     }
 
