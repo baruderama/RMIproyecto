@@ -137,10 +137,10 @@ public class FirebaseConnection extends Server {
              //String numAux=String.valueOf(document.getString("numero"));
              //int num=Integer.parseInt(numAux);
              //Peticiones peCopia= new Peticiones();
-             //document.getId(),
-             
+             System.out.println("este el cod"+document.getId());
+             System.out.println("esta el cant"+document.getString("cantidad"));
              peCopia.setCantidadVacuna(document.getString("cantidad"));
-             peCopia.setCantidadVacuna( document.getString("tipo"));
+             peCopia.setTipoVacuna(document.getString("tipo"));
              
             
              
@@ -169,7 +169,7 @@ public class FirebaseConnection extends Server {
              //document.getId(),
              
              peCopia.setCantidadVacuna(document.getString("cantidad"));
-             peCopia.setCantidadVacuna( document.getString("tipo"));
+             peCopia.setTipoVacuna(document.getString("tipo"));
              
             
              
@@ -198,7 +198,7 @@ public class FirebaseConnection extends Server {
              //document.getId(),
              
              peCopia.setCantidadVacuna(document.getString("cantidad"));
-             peCopia.setCantidadVacuna( document.getString("tipo"));
+             peCopia.setTipoVacuna(document.getString("tipo"));
              
             
              

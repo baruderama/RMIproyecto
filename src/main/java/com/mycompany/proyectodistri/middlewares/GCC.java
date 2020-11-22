@@ -72,16 +72,18 @@ public class GCC {
             peticion.setCantidadVacuna(String.valueOf(ips.vacAux1));
             peticion.setTipoVacuna("1");
             peticionesNuevas.add(peticion);
-            
+            System.out.println("lista"+ peticionesNuevas.get(0).getTipoVacuna());
             Peticiones peticion2 = new Peticiones();
-            peticion.setCantidadVacuna(String.valueOf(ips.vacAux1));
-            peticion.setTipoVacuna("1");
-            peticionesNuevas.add(peticion);
-            
+            peticion2.setCantidadVacuna(String.valueOf(ips.vacAux2));
+            peticion2.setTipoVacuna("2");
+            peticionesNuevas.add(peticion2);
+            System.out.println("lista"+ peticionesNuevas.get(1).getTipoVacuna());
             Peticiones peticion3 = new Peticiones();
-            peticion.setCantidadVacuna(String.valueOf(ips.vacAux1));
-            peticion.setTipoVacuna("1");
-            peticionesNuevas.add(peticion);
+            peticion3.setCantidadVacuna(String.valueOf(ips.vacAux3));
+            peticion3.setTipoVacuna("3");
+            peticionesNuevas.add(peticion3);
+            
+            System.out.println("lista"+ peticionesNuevas.get(2).getTipoVacuna());
             
         } else {
         
@@ -133,21 +135,23 @@ public class GCC {
 
     public static void actualizarBD(List<Peticiones> peticionesNuevas) {
         //FirebaseConnection.conectar();
-
+        
+         
         for (Peticiones p : peticionesNuevas) {
+            System.out.println("tipo VAC"+p.getTipoVacuna());
             if (p.getTipoVacuna().equals("1")) {
                 Map<String, Object> data = new HashMap<>();
                 data.put("cantidad", p.getCantidadVacuna());
                 data.put("tipo", p.getTipoVacuna());
-                String uid = java.util.UUID.randomUUID().toString();
-                System.out.println("que paso?");
+                String uid = "VAC1";
+                System.out.println("que paso34"+p.getCantidadVacuna());
                 FirebaseConnection.insertarDatos("vacuna1", uid, data);
             }
             if (p.getTipoVacuna().equals("2")) {
                 Map<String, Object> data = new HashMap<>();
                 data.put("cantidad", p.getCantidadVacuna());
                 data.put("tipo", p.getTipoVacuna());
-                String uid = java.util.UUID.randomUUID().toString();
+                String uid = "VAC2";
                 System.out.println("que paso?");
                 FirebaseConnection.insertarDatos("vacuna2", uid, data);
             }
@@ -155,8 +159,8 @@ public class GCC {
                 Map<String, Object> data = new HashMap<>();
                 data.put("cantidad", p.getCantidadVacuna());
                 data.put("tipo", p.getTipoVacuna());
-                String uid = java.util.UUID.randomUUID().toString();
-                System.out.println("que paso?");
+                String uid = "VAC3";
+                System.out.println("que paso? 3");
                 FirebaseConnection.insertarDatos("vacuna3", uid, data);
             }
         }

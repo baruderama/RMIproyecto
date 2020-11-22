@@ -37,7 +37,7 @@ public class IPS {
 
         
         for(Peticiones p: transaccion.getP() ) {
-            
+            System.out.println("es "+p.getTipoVacuna());
             if(p.getTipoVacuna().equals("1"))
                 vacAux1 = vac1 - Integer.parseInt(p.getCantidadVacuna());
             if(p.getTipoVacuna().equals("2"))
@@ -45,6 +45,8 @@ public class IPS {
             if(p.getTipoVacuna().equals("3"))
                 vacAux3 = vac3 - Integer.parseInt(p.getCantidadVacuna());    
         }
+        
+        
         
         
         //return null;    

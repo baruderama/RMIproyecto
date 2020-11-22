@@ -82,7 +82,7 @@ public class Eps implements Serializable{
          Peticiones Vac3= FirebaseConnection.buscarVac3();
          int cant3Bd=Integer.parseInt(Vac3.getCantidadVacuna());
          
-         
+         System.out.println("valor de la bd"+Vac1.getCantidadVacuna());
          
          if(cant1<=cant1Bd)
              conf1=true;
@@ -99,6 +99,7 @@ public class Eps implements Serializable{
              pAux.setCantidadVacuna(cant1String);
              pAux.setTipoVacuna("1");
              transaccion.add(pAux);
+             System.out.println("si llena");
          }else{
              Peticiones pAux=new Peticiones();
              transaccion.add(pAux);

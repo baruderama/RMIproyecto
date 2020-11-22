@@ -25,6 +25,12 @@ public class Server implements Int {
     public static List<Pruebita> listaNombresPruebas = new ArrayList<Pruebita>();
     public static List<Eps> listaEpsActivas= new ArrayList<Eps>();
     public static String actualEps;
+    public static int vac1;
+    public static int vac2;
+    public static int vac3;
+    public static int vacAux1;
+    public static int vacAux2;
+    public static int vacAux3;
      public Server() {}
 
      @Override
