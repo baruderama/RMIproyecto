@@ -27,6 +27,10 @@ public interface Int extends Remote{
     
     public void entregarListaPeticiones(List<Peticiones> p)throws RemoteException;
     
+    public void enviarTransaccion(List<Peticiones> p)throws RemoteException;
+    
+    public void buscarVacuna(Transaccion transaccion)throws RemoteException;
+    
     //public boolean pacienteGuardar(Paciente paciente);
     
     

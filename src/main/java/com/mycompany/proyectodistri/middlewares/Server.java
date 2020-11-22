@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.mycompany.proyectodistri.middlewares;
+import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;
@@ -93,9 +94,45 @@ public class Server implements Int {
 
     @Override
     public void entregarListaPeticiones(List<Peticiones> p) throws RemoteException {
-        Eps.obtenerPeticiones(p);
-        System.out.println("entra2");
+        try {
+            Eps.obtenerPeticiones(p);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("entra4");
     }
+
+    @Override
+    public void enviarTransaccion(List<Peticiones> peticiones) throws RemoteException {
+        GCC gcc = new GCC();
+        Transaccion transaccion = new Transaccion(peticiones, gcc);
+        transaccion.start();
+        try {
+            transaccion.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Ejecutando hilo: "+transaccion.getName());
+        
+        
+    }
+
+    @Override
+    public void buscarVacuna(Transaccion t) throws RemoteException {
+        try {
+            IPS.buscarVacuna(t);
+        } catch (IOException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     
     
 

@@ -5,44 +5,52 @@
  */
 package com.mycompany.proyectodistri.middlewares;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author fede1
  */
 public class Transaccion extends Thread{
-    private Paciente paciente;
-    private int vacunas;
-    private String laboratorio;
+    
+    private List<Peticiones> p;
     private GCC gcc;
     private int rand;
 
-    public Transaccion(Paciente paciente, int vacunas, String laboratorio, GCC gcc) {
-        this.paciente = paciente;
-        this.vacunas = vacunas;
-        this.laboratorio = laboratorio;
+    public Transaccion(List<Peticiones> p, GCC gcc) {
+        
+        this.p=p;
         this.gcc = gcc;
     }
     
-    public void run(){       
-        gcc.distribuir();
+    public void run(){  
+        System.out.println("Hilo2");
+        try {
+            
+            while(!gcc.distribuir(this)) {
+                System.out.println("Transacción abortada!!");
+            }
+            
+            System.out.println("Transaccion exitosa.");
+            
+            
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("Inicia el hilo de la transaccion");
     }
 
-    public int getVacunas() {
-        return vacunas;
-    }
-
-    public void setVacunas(int vacunas) {
-        this.vacunas = vacunas;
-    }    
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public String getLaboratorio() {
-        return laboratorio;
-    }
+   
 
 
     public double getRand() {
@@ -61,18 +69,22 @@ public class Transaccion extends Thread{
         return MAX_PRIORITY;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-    public void setLaboratorio(String laboratorio) {
-        this.laboratorio = laboratorio;
-    }
+   
 
 
     public void setRand(int rand) {
         this.rand = rand;
     }
+
+    public List<Peticiones> getP() {
+        return p;
+    }
+
+    public void setP(List<Peticiones> p) {
+        this.p = p;
+    }
+    
+    
     
     
 }

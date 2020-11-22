@@ -14,11 +14,12 @@ import java.util.logging.Logger;
  * @author fede1
  */
 public class Bloqueo {
-    private IPS ips;
-    private Vector propietarios;
-    private TipoBloqueo tipoBloqueo;
+    private static IPS ips;
+    private static Vector propietarios;
+    private static TipoBloqueo tipoBloqueo;
     
-    public synchronized void adquiere(Transaccion transaccion, TipoBloqueo tipoBloqueoRecibido) {
+    
+    public static synchronized void adquiere(Transaccion transaccion, TipoBloqueo tipoBloqueoRecibido) {
         while(tipoBloqueo == TipoBloqueo.ESCRITURA) {
             try {
                 transaccion.wait();
@@ -32,8 +33,8 @@ public class Bloqueo {
         }
     }
         
-    public synchronized void libera(Transaccion transaccion) {
+    public static synchronized void libera(Transaccion transaccion) {
         propietarios.remove(transaccion);
-        notify();
+        transaccion.notify();
     }    
 }

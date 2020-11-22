@@ -131,6 +131,10 @@ public class Eps implements Serializable{
 
          }
          
+         Int stub= Client.conectar();
+         
+         stub.enviarTransaccion(transaccion);
+         
          }
          
 }

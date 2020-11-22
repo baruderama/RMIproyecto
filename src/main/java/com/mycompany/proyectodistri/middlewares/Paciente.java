@@ -29,11 +29,11 @@ public class Paciente implements Serializable{
         this.instituciones.add(new IPS("ips2"));
     }
     
-    public void crearTransaccion(int vacunas, String laboratorio, GCC gcc) {
-        Transaccion transaccion = new Transaccion(this, vacunas, laboratorio, gcc);
+    /*public void crearTransaccion(int vacunas, String laboratorio, GCC gcc) {
+        //Transaccion transaccion = new Transaccion(this, vacunas, laboratorio, gcc);
         gcc.transacciones.add(transaccion);
         transaccion.start();
-    }
+    }*/
     
     public IPS buscarIPS(String nombre){
         for(IPS ips: instituciones){
