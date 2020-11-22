@@ -6,6 +6,7 @@
 package com.mycompany.proyectodistri.middlewares;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author fede1
  */
-public class Transaccion extends Thread{
+public class Transaccion extends Thread implements Serializable{
     
     private List<Peticiones> p;
     private GCC gcc;

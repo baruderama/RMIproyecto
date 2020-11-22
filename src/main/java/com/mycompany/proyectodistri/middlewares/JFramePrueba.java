@@ -230,9 +230,9 @@ public class JFramePrueba extends javax.swing.JFrame {
         // TODO add your handling code here:
         Map<String,Object> data = new HashMap<>();
         data.put("cantidad","1000");
-        data.put("tipo","1");
-        String uid= "VAC1";
-        FirebaseConnection.insertarDatos("vacuna1", uid, data);
+        data.put("tipo","3");
+        String uid= "VAC3";
+        FirebaseConnection.insertarDatos("vacuna3", uid, data);
         
         /*
         in=passwordManager.authenticate(contra, hashPassword);

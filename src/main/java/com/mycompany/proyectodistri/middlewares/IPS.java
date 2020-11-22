@@ -46,6 +46,17 @@ public class IPS {
                 vacAux3 = vac3 - Integer.parseInt(p.getCantidadVacuna());    
         }
         
+        Int stub=Client.conectar();
+        stub.setVac1(vac1);
+        stub.setVac2(vac2);
+        stub.setVac3(vac3);
+        stub.setVacAux1(vacAux1);
+        stub.setVacAux2(vacAux2);
+        stub.setVacAux3(vacAux3);
+        
+        
+        
+        
         
         
         

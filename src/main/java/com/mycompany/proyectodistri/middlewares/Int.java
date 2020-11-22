@@ -23,6 +23,35 @@ public interface Int extends Remote{
     
     public void setListaEps(List<Eps> eps)throws RemoteException;
     
+    
+    
+    public  int getVac1() throws RemoteException;
+    
+    public  void setVac1(int vac1)throws RemoteException;
+    
+    public int getVac2()throws RemoteException;
+    
+    public  void setVac2(int vac2)throws RemoteException;
+            
+    public  int getVac3()throws RemoteException;
+    
+    public void setVac3(int vac3)throws RemoteException;
+    
+    public int getVacAux1()throws RemoteException;
+    
+    public  void setVacAux1(int vacAux1)throws RemoteException;
+    
+    public  int getVacAux2()throws RemoteException;
+    
+    public  void setVacAux2(int vacAux2)throws RemoteException;
+    
+    public  int getVacAux3()throws RemoteException;
+    
+    public void setVacAux3(int vacAux3)throws RemoteException;
+    
+    
+    
+    
     public List<Eps> getlistaEps() throws RemoteException;
     
     public void entregarListaPeticiones(List<Peticiones> p)throws RemoteException;
@@ -30,6 +59,8 @@ public interface Int extends Remote{
     public void enviarTransaccion(List<Peticiones> p)throws RemoteException;
     
     public void buscarVacuna(Transaccion transaccion)throws RemoteException;
+    
+    
     
     //public boolean pacienteGuardar(Paciente paciente);
     

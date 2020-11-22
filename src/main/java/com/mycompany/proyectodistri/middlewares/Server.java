@@ -137,6 +137,68 @@ public class Server implements Int {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @Override
+    public  int getVac1() {
+        return vac1;
+    }
+
+    @Override
+    public  void setVac1(int vac1) {
+        Server.vac1 = vac1;
+    }
+
+    @Override
+    public  int getVac2() {
+        return vac2;
+    }
+
+    @Override
+    public  void setVac2(int vac2) {
+        Server.vac2 = vac2;
+    }
+
+    @Override
+    public int getVac3() {
+        return vac3;
+    }
+
+    @Override
+    public  void setVac3(int vac3) {
+        Server.vac3 = vac3;
+    }
+
+    @Override
+    public  int getVacAux1() {
+        return vacAux1;
+    }
+
+    @Override
+    public void setVacAux1(int vacAux1) {
+        Server.vacAux1 = vacAux1;
+    }
+
+    @Override
+    public  int getVacAux2() {
+        return vacAux2;
+    }
+
+    @Override
+    public  void setVacAux2(int vacAux2) {
+        Server.vacAux2 = vacAux2;
+    }
+
+    @Override
+    public  int getVacAux3() {
+        return vacAux3;
+    }
+
+    @Override
+    public  void setVacAux3(int vacAux3) {
+        Server.vacAux3 = vacAux3;
+    }
+    
+    
     
     
     

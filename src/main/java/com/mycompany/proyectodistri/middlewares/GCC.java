@@ -7,6 +7,7 @@ package com.mycompany.proyectodistri.middlewares;
 
 import static com.mycompany.proyectodistri.middlewares.JFramePaciente.secretkey;
 import java.io.IOException;
+import java.io.Serializable;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ import java.util.logging.Logger;
  *
  * @author federico
  */
-public class GCC {
+public class GCC implements Serializable {
 
     Stack<List<Peticiones>> peticiones;
     IPS ips;
@@ -53,7 +54,10 @@ public class GCC {
             System.out.println("Error al buscar la IPS");*/
         //Int stub=Client.conectar();
         //stub.buscarVacuna(transaccion);
-        ips.buscarVacuna(transaccion);
+        Int stub=Client.conectar();
+        
+        stub.buscarVacuna(transaccion);
+        //ips.buscarVacuna(transaccion);
         Bloqueo.adquiere(transaccion, TipoBloqueo.ESCRITURA);
         /*
         if(peticiones.empty()){
@@ -69,17 +73,17 @@ public class GCC {
         if (peticiones.empty()) {
             
             Peticiones peticion = new Peticiones();
-            peticion.setCantidadVacuna(String.valueOf(ips.vacAux1));
+            peticion.setCantidadVacuna(String.valueOf(stub.getVacAux1()));
             peticion.setTipoVacuna("1");
             peticionesNuevas.add(peticion);
             System.out.println("lista"+ peticionesNuevas.get(0).getTipoVacuna());
             Peticiones peticion2 = new Peticiones();
-            peticion2.setCantidadVacuna(String.valueOf(ips.vacAux2));
+            peticion2.setCantidadVacuna(String.valueOf(stub.getVacAux2()));
             peticion2.setTipoVacuna("2");
             peticionesNuevas.add(peticion2);
             System.out.println("lista"+ peticionesNuevas.get(1).getTipoVacuna());
             Peticiones peticion3 = new Peticiones();
-            peticion3.setCantidadVacuna(String.valueOf(ips.vacAux3));
+            peticion3.setCantidadVacuna(String.valueOf(stub.getVacAux3()));
             peticion3.setTipoVacuna("3");
             peticionesNuevas.add(peticion3);
             
@@ -89,10 +93,10 @@ public class GCC {
         
             for (Peticiones p : peticiones.peek()) {
                 if (p.getTipoVacuna().equals("1")) {
-                    if (Integer.parseInt(p.getCantidadVacuna()) == ips.vac1) {
+                    if (Integer.parseInt(p.getCantidadVacuna()) == stub.getVac1()) {
                         System.out.println("vacuna1");
                         Peticiones peticion = new Peticiones();
-                        peticion.setCantidadVacuna(String.valueOf(ips.vacAux1));
+                        peticion.setCantidadVacuna(String.valueOf(stub.getVacAux1()));
                         peticion.setTipoVacuna("1");
                         peticionesNuevas.add(peticion);
                     } else {
@@ -100,9 +104,9 @@ public class GCC {
                     }
                 }
                 if (p.getTipoVacuna().equals("2")) {
-                    if (Integer.parseInt(p.getCantidadVacuna()) == ips.vac2) {
+                    if (Integer.parseInt(p.getCantidadVacuna()) == stub.getVac2()) {
                         Peticiones peticion = new Peticiones();
-                        peticion.setCantidadVacuna(String.valueOf(ips.vacAux2));
+                        peticion.setCantidadVacuna(String.valueOf(stub.getVacAux2()));
                         peticion.setTipoVacuna("2");
                         peticionesNuevas.add(peticion);
                     } else {
@@ -110,9 +114,9 @@ public class GCC {
                     }
                 }
                 if (p.getTipoVacuna().equals("3")) {
-                    if (Integer.parseInt(p.getCantidadVacuna()) == ips.vac3) {
+                    if (Integer.parseInt(p.getCantidadVacuna()) == stub.getVac3()) {
                         Peticiones peticion = new Peticiones();
-                        peticion.setCantidadVacuna(String.valueOf(ips.vacAux3));
+                        peticion.setCantidadVacuna(String.valueOf(stub.getVacAux3()));
                         peticion.setTipoVacuna("3");
                         peticionesNuevas.add(peticion);
                     } else {
