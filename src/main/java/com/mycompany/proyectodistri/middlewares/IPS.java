@@ -28,13 +28,27 @@ public class IPS {
         this.nombre = nombre;
     }
     
-    public static void buscarVacuna(Transaccion transaccion) throws IOException, InterruptedException, ExecutionException {
+    public static void buscarVacuna(Transaccion transaccion) throws IOException, InterruptedException, ExecutionException, Exception {
         //FirebaseConnection.conectar();
         
-        vac1=Integer.parseInt(FirebaseConnection.buscarVac1().getCantidadVacuna());
-        vac2=Integer.parseInt(FirebaseConnection.buscarVac2().getCantidadVacuna());
-        vac3=Integer.parseInt(FirebaseConnection.buscarVac3().getCantidadVacuna());
+        //vac1=Integer.parseInt(FirebaseConnection.buscarVac1().getCantidadVacuna());
+        //vac2=Integer.parseInt(FirebaseConnection.buscarVac2().getCantidadVacuna());
+        //vac3=Integer.parseInt(FirebaseConnection.buscarVac3().getCantidadVacuna());
+        //if(FirebaseConnection.bd==null)
+            FirebaseConnection.conectar();
 
+                if(FirebaseConnection.buscarVac1().getCantidadVacuna()!=null)
+                    vac1 = Integer.parseInt(FirebaseConnection.buscarVac1().getCantidadVacuna());
+                else
+                    System.out.println("NO SE ENCONTRARON EXISTENCIAS DE LA VACUNA 1");
+                if(FirebaseConnection.buscarVac2().getCantidadVacuna()!=null)
+                    vac2=Integer.parseInt(FirebaseConnection.buscarVac2().getCantidadVacuna());
+                else
+                    System.out.println("NO SE ENCONTRARON EXISTENCIAS DE LA VACUNA 2");
+                if(FirebaseConnection.buscarVac3().getCantidadVacuna()!=null)
+                    vac3=Integer.parseInt(FirebaseConnection.buscarVac3().getCantidadVacuna());
+                else
+                    System.out.println("NO SE ENCONTRARON EXISTENCIAS DE LA VACUNA 3");
         
         for(Peticiones p: transaccion.getP() ) {
             System.out.println("es "+p.getTipoVacuna());
@@ -55,7 +69,7 @@ public class IPS {
         stub.setVacAux3(vacAux3);
         
         
-        
+        //FirebaseConnection.bd.close();
         
         
         

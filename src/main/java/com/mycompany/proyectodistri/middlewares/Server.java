@@ -41,15 +41,16 @@ public class Server implements Int {
         
     public static void main(String args[]) {
         
+            System.setProperty("java.rmi.server.hostname","192.168.0.12");
         try {
             Server obj = new Server();
-            Int stub = (Int) UnicastRemoteObject.exportObject(obj, 0);
+            
+            Int stub = (Int) UnicastRemoteObject.exportObject(obj, 1);
 
             // Bind the remote object's stub in the registry
-            Registry registry = LocateRegistry.createRegistry(1083);
+            Registry registry = LocateRegistry.createRegistry(1086);
             
             registry.bind("Hello", stub);
-
             System.err.println("Server ready");
         } catch (Exception e) {
             System.err.println("Server exception: " + e.toString());
@@ -128,12 +129,15 @@ public class Server implements Int {
     @Override
     public void buscarVacuna(Transaccion t) throws RemoteException {
         try {
+            System.err.println("buscarVacuna.......");
             IPS.buscarVacuna(t);
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ExecutionException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -47,11 +47,13 @@ public class Client {
     
     public static Int conectar(){
         
+        //System.setProperty("java.rmi.server.hostname","127.0.0.1");
+        
         try{
             Registry registry;
 
-            //registry = LocateRegistry.getRegistry("192.168.0.16",1083);//REMOTO
-            registry = LocateRegistry.getRegistry(1083); //LOCAL
+            //registry = LocateRegistry.getRegistry("192.168.0.14",64001);//REMOTO
+            registry = LocateRegistry.getRegistry(1086); //LOCAL
             Int stub = (Int) registry.lookup("Hello");
             return stub;
         } catch (Exception e) {
@@ -68,6 +70,20 @@ public class Client {
         return stub.buscarPruebita();
     }
     
+    public static Int conectarGCC(){
+         try{
+            Registry registry;
+
+            registry = LocateRegistry.getRegistry("192.168.0.16",1084);//REMOTO
+            //registry = LocateRegistry.getRegistry(1083); //LOCAL
+            Int stub = (Int) registry.lookup("Hello");
+            return stub;
+        } catch (Exception e) {
+            System.err.println("Client exception: " + e.toString());
+            e.printStackTrace();
+        }
+        return null;
+    }
    
     
 }

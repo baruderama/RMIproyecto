@@ -50,6 +50,8 @@ public class FirebaseConnection extends Server {
         FirebaseApp.initializeApp(options);
         bd= FirestoreClient.getFirestore();
         System.out.println("succes");
+        
+        
 
     }
     

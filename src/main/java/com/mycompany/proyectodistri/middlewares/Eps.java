@@ -132,10 +132,10 @@ public class Eps implements Serializable{
 
          }
          
-         Int stub= Client.conectar();
-         
+         Int stub= Client.conectarGCC();
+         System.out.println("Se detecto un cliente....");
          stub.enviarTransaccion(transaccion);
-         
+         System.out.println("Se recibio una transaccion del cliente....");
          }
          
 }
