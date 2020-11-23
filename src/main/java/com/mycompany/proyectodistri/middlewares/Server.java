@@ -50,7 +50,8 @@ public class Server implements Int {
             
             registry.bind("Hello", stub);
 
-            System.err.println("Server ready");
+            System.err.println("Server Ready");
+            FirebaseConnection.conectar();
         } catch (Exception e) {
             System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
@@ -77,9 +78,6 @@ public class Server implements Int {
         //return listaNombresPruebas;
          return listaNombresPruebas;
     }
-    
-    
-    //return listaNombresPruebas;
 
     @Override
     public void setLista(List<Pruebita> lista) throws RemoteException {
@@ -120,7 +118,6 @@ public class Server implements Int {
         } catch (InterruptedException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Ejecutando hilo: "+transaccion.getName());
         
         
     }

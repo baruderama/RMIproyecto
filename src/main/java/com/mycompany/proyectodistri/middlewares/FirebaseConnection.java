@@ -49,7 +49,7 @@ public class FirebaseConnection extends Server {
 
         FirebaseApp.initializeApp(options);
         bd= FirestoreClient.getFirestore();
-        System.out.println("succes");
+        System.out.println("SUCCES");
 
     }
     
@@ -57,7 +57,6 @@ public class FirebaseConnection extends Server {
         try{
             
             DocumentReference docref=bd.collection(collecion).document(documento);
-            System.err.println("por aquíii");
             ApiFuture<WriteResult> result= docref.set(data);
             System.out.println("Update time: "+ result.get().getUpdateTime() );
             
@@ -69,7 +68,6 @@ public class FirebaseConnection extends Server {
    
 }
      public static List<Pruebita> buscarNombresPruebas()throws InterruptedException,ExecutionException, RemoteException{
-         System.out.println("la vida");
          CollectionReference nombres= bd.collection("nombres");
          ApiFuture<QuerySnapshot> querySnapshot= nombres.get();
          
@@ -102,7 +100,6 @@ public class FirebaseConnection extends Server {
     }
     
     public static List<Eps> buscarEPS()throws InterruptedException,ExecutionException, RemoteException{
-         System.out.println("la vida");
          CollectionReference eps= bd.collection("EPS");
          ApiFuture<QuerySnapshot> querySnapshot= eps.get();
          
@@ -127,31 +124,16 @@ public class FirebaseConnection extends Server {
     }
     
     public static Peticiones buscarVac1()throws InterruptedException,ExecutionException, RemoteException{
-         System.out.println("la vida");
          CollectionReference peti= bd.collection("vacuna1");
          ApiFuture<QuerySnapshot> querySnapshot= peti.get();
          List<Peticiones> listaP=new ArrayList<Peticiones>();
          Peticiones peCopia= new Peticiones();
          
          for(DocumentSnapshot document: querySnapshot.get().getDocuments()){
-             //String numAux=String.valueOf(document.getString("numero"));
-             //int num=Integer.parseInt(numAux);
-             //Peticiones peCopia= new Peticiones();
-             System.out.println("este el cod"+document.getId());
-             System.out.println("esta el cant"+document.getString("cantidad"));
              peCopia.setCantidadVacuna(document.getString("cantidad"));
              peCopia.setTipoVacuna(document.getString("tipo"));
              
-            
-             
-             
-             //listaEps.add(epsCopia);
-             //Int stub=Client.conectar();
-             //Server.listaEpsActivas.add(epsCopia);
-             //stub.setListaEps(listaEps);
-             //System.out.println(document.getId());
-             //System.out.println(Server.listaNombresPruebas.get(0).getNombre());
-         }
+            }
          return peCopia;
     }
     
@@ -185,7 +167,6 @@ public class FirebaseConnection extends Server {
     }
      
       public static Peticiones buscarVac3()throws InterruptedException,ExecutionException, RemoteException{
-         System.out.println("la vida");
          CollectionReference peti= bd.collection("vacuna3");
          ApiFuture<QuerySnapshot> querySnapshot= peti.get();
          List<Peticiones> listaP=new ArrayList<Peticiones>();

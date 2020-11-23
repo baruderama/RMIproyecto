@@ -35,10 +35,6 @@ public class GCC implements Serializable {
 
     public boolean distribuir(Transaccion transaccion) throws IOException, InterruptedException, ExecutionException, Exception {
 
-        /*Transaccion transaccion = transacciones.poll();
-        
-        if(transaccion==null)
-            System.out.println("No hay transacciones en la cola!");*/
         rand = (int) Math.random() * 2;
         String nombre = null;
 
@@ -48,53 +44,41 @@ public class GCC implements Serializable {
         if (rand == 1) {
             nombre = "ips2";
         }
-        /*if(nombre!=null && transaccion!=null)
-            ips = transaccion.getPaciente().buscarIPS(nombre);
-        else
-            System.out.println("Error al buscar la IPS");*/
-        //Int stub=Client.conectar();
-        //stub.buscarVacuna(transaccion);
-        Int stub=Client.conectar();
-        System.out.println("Enviando a IPS de Camilo...");
-        stub.buscarVacuna(transaccion);
-        //ips.buscarVacuna(transaccion);
-        Bloqueo.adquiere(transaccion, TipoBloqueo.ESCRITURA);
-        /*
-        if(peticiones.empty()){
-            System.out.println("emty");
-            peticiones.push(transaccion.getP());
-            actualizarBD(transaccion.getP());
-            return true;
-        }
-         */
 
+        Int stub = Client.conectar();
+        System.out.println("Enviando transaccion a IPS...");
+        stub.buscarVacuna(transaccion);
+
+        Bloqueo.adquiere(transaccion, TipoBloqueo.ESCRITURA);
+        System.out.println("Se bloquea la IPS de destino...");
         List<Peticiones> peticionesNuevas = new ArrayList<>();
 
         if (peticiones.empty()) {
-            
+
             Peticiones peticion = new Peticiones();
             peticion.setCantidadVacuna(String.valueOf(stub.getVacAux1()));
             peticion.setTipoVacuna("1");
             peticionesNuevas.add(peticion);
-            System.out.println("lista"+ peticionesNuevas.get(0).getTipoVacuna());
+            System.out.println("lista" + peticionesNuevas.get(0).getTipoVacuna());
+
             Peticiones peticion2 = new Peticiones();
             peticion2.setCantidadVacuna(String.valueOf(stub.getVacAux2()));
             peticion2.setTipoVacuna("2");
             peticionesNuevas.add(peticion2);
-            System.out.println("lista"+ peticionesNuevas.get(1).getTipoVacuna());
+            System.out.println("lista" + peticionesNuevas.get(1).getTipoVacuna());
+
             Peticiones peticion3 = new Peticiones();
             peticion3.setCantidadVacuna(String.valueOf(stub.getVacAux3()));
             peticion3.setTipoVacuna("3");
             peticionesNuevas.add(peticion3);
-            
-            System.out.println("lista"+ peticionesNuevas.get(2).getTipoVacuna());
-            
+            System.out.println("lista" + peticionesNuevas.get(2).getTipoVacuna());
+
         } else {
-        
+            System.out.println("Preparando COMMIT...");
             for (Peticiones p : peticiones.peek()) {
                 if (p.getTipoVacuna().equals("1")) {
                     if (Integer.parseInt(p.getCantidadVacuna()) == stub.getVac1()) {
-                        System.out.println("vacuna1");
+                        System.out.println("Vacuna 1 OK");
                         Peticiones peticion = new Peticiones();
                         peticion.setCantidadVacuna(String.valueOf(stub.getVacAux1()));
                         peticion.setTipoVacuna("1");
@@ -105,6 +89,7 @@ public class GCC implements Serializable {
                 }
                 if (p.getTipoVacuna().equals("2")) {
                     if (Integer.parseInt(p.getCantidadVacuna()) == stub.getVac2()) {
+                        System.out.println("Vacuna 2 OK");
                         Peticiones peticion = new Peticiones();
                         peticion.setCantidadVacuna(String.valueOf(stub.getVacAux2()));
                         peticion.setTipoVacuna("2");
@@ -115,6 +100,7 @@ public class GCC implements Serializable {
                 }
                 if (p.getTipoVacuna().equals("3")) {
                     if (Integer.parseInt(p.getCantidadVacuna()) == stub.getVac3()) {
+                        System.out.println("Vacuna 3 OK");
                         Peticiones peticion = new Peticiones();
                         peticion.setCantidadVacuna(String.valueOf(stub.getVacAux3()));
                         peticion.setTipoVacuna("3");
@@ -126,29 +112,21 @@ public class GCC implements Serializable {
 
             }
         }
-            peticiones.push(peticionesNuevas);
-            //Transaccion transNueva = new Transaccion(peticionesNuevas, this);
-            //FirebaseConnection.conectar();
-
-            actualizarBD(peticionesNuevas);
-
-            System.out.println("Éxito");
-            return true;
-        }
-    
+        peticiones.push(peticionesNuevas);
+        actualizarBD(peticionesNuevas);
+        System.out.println("COMMIT EXITOSO");
+        
+        return true;
+    }
 
     public static void actualizarBD(List<Peticiones> peticionesNuevas) throws IOException, Exception {
-        FirebaseConnection.conectar();
-        
-         
+
         for (Peticiones p : peticionesNuevas) {
-            System.out.println("tipo VAC"+p.getTipoVacuna());
             if (p.getTipoVacuna().equals("1")) {
                 Map<String, Object> data = new HashMap<>();
                 data.put("cantidad", p.getCantidadVacuna());
                 data.put("tipo", p.getTipoVacuna());
                 String uid = "VAC1";
-                System.out.println("que paso34"+p.getCantidadVacuna());
                 FirebaseConnection.insertarDatos("vacuna1", uid, data);
             }
             if (p.getTipoVacuna().equals("2")) {
@@ -156,7 +134,6 @@ public class GCC implements Serializable {
                 data.put("cantidad", p.getCantidadVacuna());
                 data.put("tipo", p.getTipoVacuna());
                 String uid = "VAC2";
-                System.out.println("que paso?");
                 FirebaseConnection.insertarDatos("vacuna2", uid, data);
             }
             if (p.getTipoVacuna().equals("3")) {
@@ -164,10 +141,8 @@ public class GCC implements Serializable {
                 data.put("cantidad", p.getCantidadVacuna());
                 data.put("tipo", p.getTipoVacuna());
                 String uid = "VAC3";
-                System.out.println("que paso? 3");
                 FirebaseConnection.insertarDatos("vacuna3", uid, data);
             }
         }
-        FirebaseConnection.bd.close();
     }
 }

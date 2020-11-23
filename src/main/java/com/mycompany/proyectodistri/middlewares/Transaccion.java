@@ -29,18 +29,15 @@ public class Transaccion extends Thread implements Serializable{
     }
     
     public void run(){  
-        System.out.println("Hilo2");
+        System.out.println("Ejecutando Hilo: " + this.getName());
         try {
             
             while(!gcc.distribuir(this)) {
-                System.out.println("Transacción abortada!!");
+                System.out.println("¡TRANSACCION ABORTADA!");
             }
             
-            System.out.println("Transaccion exitosa.");
-            
-            
-            
-            
+            System.out.println("TRANSACCION EXITOSA");
+        
         } catch (IOException ex) {
             Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
@@ -50,7 +47,6 @@ public class Transaccion extends Thread implements Serializable{
         } catch (Exception ex) {
             Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Inicia el hilo de la transaccion");
     }
 
    
