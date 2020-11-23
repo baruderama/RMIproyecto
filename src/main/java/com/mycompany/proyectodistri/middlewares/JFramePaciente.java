@@ -30,11 +30,7 @@ public class JFramePaciente extends javax.swing.JFrame {
     public JFramePaciente() throws RemoteException {
         initComponents();
         
-        try{
-            FirebaseConnection.conectar();
-        }catch(Exception e){
-            
-        }
+        
         
         Int stub=Client.conectar();
         stub.getlistaEps().forEach(_item -> {
@@ -280,6 +276,7 @@ public class JFramePaciente extends javax.swing.JFrame {
         char[] contrasena = jPasswordField2.getPassword();
         List<Peticiones> p= new ArrayList<Peticiones>();
         //Paciente paciente = new Paciente(usuario, contrasena);
+        
         
         Int stub=Client.conectar();
         try {

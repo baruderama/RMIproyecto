@@ -51,6 +51,7 @@ public class Server implements Int {
             registry.bind("Hello", stub);
 
             System.err.println("Server ready");
+            FirebaseConnection.conectar();
         } catch (Exception e) {
             System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
@@ -106,6 +107,8 @@ public class Server implements Int {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ExecutionException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("entra4");
     }
@@ -129,6 +132,7 @@ public class Server implements Int {
     public void buscarVacuna(Transaccion t) throws RemoteException {
         try {
             IPS.buscarVacuna(t);
+            System.out.println("Estoy aca bro");
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {

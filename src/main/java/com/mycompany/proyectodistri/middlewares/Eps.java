@@ -43,7 +43,7 @@ public class Eps implements Serializable{
     }
     
     
-    public static void obtenerPeticiones(List<Peticiones> p) throws InterruptedException, ExecutionException, RemoteException{
+    public static void obtenerPeticiones(List<Peticiones> p) throws InterruptedException, ExecutionException, RemoteException, Exception{
         System.out.println("entra3");
        Peticiones peCopia= new Peticiones();
        int cantidad1=0;
@@ -66,11 +66,12 @@ public class Eps implements Serializable{
         armartrans(cantidad1,cantidad2,cantidad3);
     }
     
-    public static void armartrans(int cant1,int cant2, int cant3) throws InterruptedException, ExecutionException, RemoteException{
+    public static void armartrans(int cant1,int cant2, int cant3) throws InterruptedException, ExecutionException, RemoteException, Exception{
         boolean conf1=false,conf2=false,conf3=false;
         List<Peticiones> transaccion=new ArrayList<Peticiones>();
          try{
-            FirebaseConnection.conectar();
+             //if(FirebaseConnection.bd==null)
+           //FirebaseConnection.conectar();
         }catch(Exception e){
             
         }
@@ -132,7 +133,9 @@ public class Eps implements Serializable{
 
          }
          
-         Int stub= Client.conectar();
+         //FirebaseConnection.bd.close();
+         
+         Int stub= Client.conectarGcc();
          
          stub.enviarTransaccion(transaccion);
          

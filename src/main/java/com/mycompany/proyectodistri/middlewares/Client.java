@@ -68,6 +68,22 @@ public class Client {
         return stub.buscarPruebita();
     }
     
+    public static Int conectarGcc(){
+        
+        try{
+            Registry registry;
+
+            registry = LocateRegistry.getRegistry("192.168.0.16",1083);//REMOTO
+            //registry = LocateRegistry.getRegistry(1087); //LOCAL
+            Int stub = (Int) registry.lookup("Hello");
+            return stub;
+        } catch (Exception e) {
+            System.err.println("Client exception: " + e.toString());
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
    
     
 }

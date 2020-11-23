@@ -55,7 +55,7 @@ public class GCC implements Serializable {
         //Int stub=Client.conectar();
         //stub.buscarVacuna(transaccion);
         Int stub=Client.conectar();
-        
+        System.out.println("hey");
         stub.buscarVacuna(transaccion);
         //ips.buscarVacuna(transaccion);
         Bloqueo.adquiere(transaccion, TipoBloqueo.ESCRITURA);
