@@ -49,7 +49,7 @@ public class FirebaseConnection extends Server {
 
         FirebaseApp.initializeApp(options);
         bd= FirestoreClient.getFirestore();
-        System.out.println("succes");
+        System.out.println("success");
         
         
 
@@ -59,7 +59,7 @@ public class FirebaseConnection extends Server {
         try{
             
             DocumentReference docref=bd.collection(collecion).document(documento);
-            System.err.println("por aquíii");
+            //System.err.println("por aquíii");
             ApiFuture<WriteResult> result= docref.set(data);
             System.out.println("Update time: "+ result.get().getUpdateTime() );
             
@@ -71,7 +71,7 @@ public class FirebaseConnection extends Server {
    
 }
      public static List<Pruebita> buscarNombresPruebas()throws InterruptedException,ExecutionException, RemoteException{
-         System.out.println("la vida");
+         //System.out.println("la vida");
          CollectionReference nombres= bd.collection("nombres");
          ApiFuture<QuerySnapshot> querySnapshot= nombres.get();
          
@@ -104,7 +104,7 @@ public class FirebaseConnection extends Server {
     }
     
     public static List<Eps> buscarEPS()throws InterruptedException,ExecutionException, RemoteException{
-         System.out.println("la vida");
+         //System.out.println("la vida");
          CollectionReference eps= bd.collection("EPS");
          ApiFuture<QuerySnapshot> querySnapshot= eps.get();
          
@@ -129,7 +129,7 @@ public class FirebaseConnection extends Server {
     }
     
     public static Peticiones buscarVac1()throws InterruptedException,ExecutionException, RemoteException{
-         System.out.println("la vida");
+         //System.out.println("la vida");
          CollectionReference peti= bd.collection("vacuna1");
          ApiFuture<QuerySnapshot> querySnapshot= peti.get();
          List<Peticiones> listaP=new ArrayList<Peticiones>();
@@ -139,8 +139,8 @@ public class FirebaseConnection extends Server {
              //String numAux=String.valueOf(document.getString("numero"));
              //int num=Integer.parseInt(numAux);
              //Peticiones peCopia= new Peticiones();
-             System.out.println("este el cod"+document.getId());
-             System.out.println("esta el cant"+document.getString("cantidad"));
+             System.out.println("tipo de vacuna "+document.getId()+" con "+document.getString("cantidad")+ " existencias en BD");
+             //System.out.println("esta el cant"+document.getString("cantidad"));
              peCopia.setCantidadVacuna(document.getString("cantidad"));
              peCopia.setTipoVacuna(document.getString("tipo"));
              
@@ -158,7 +158,7 @@ public class FirebaseConnection extends Server {
     }
     
      public static Peticiones buscarVac2()throws InterruptedException,ExecutionException, RemoteException{
-         System.out.println("la vida");
+         //System.out.println("la vida");
          CollectionReference peti= bd.collection("vacuna2");
          ApiFuture<QuerySnapshot> querySnapshot= peti.get();
          List<Peticiones> listaP=new ArrayList<Peticiones>();
@@ -172,7 +172,7 @@ public class FirebaseConnection extends Server {
              
              peCopia.setCantidadVacuna(document.getString("cantidad"));
              peCopia.setTipoVacuna(document.getString("tipo"));
-             
+             System.out.println("tipo de vacuna "+document.getId()+" con "+document.getString("cantidad")+ " existencias en BD");
             
              
              
@@ -187,7 +187,7 @@ public class FirebaseConnection extends Server {
     }
      
       public static Peticiones buscarVac3()throws InterruptedException,ExecutionException, RemoteException{
-         System.out.println("la vida");
+         //System.out.println("la vida");
          CollectionReference peti= bd.collection("vacuna3");
          ApiFuture<QuerySnapshot> querySnapshot= peti.get();
          List<Peticiones> listaP=new ArrayList<Peticiones>();
@@ -198,7 +198,7 @@ public class FirebaseConnection extends Server {
              //int num=Integer.parseInt(numAux);
              //Peticiones peCopia= new Peticiones();
              //document.getId(),
-             
+             System.out.println("tipo de vacuna "+document.getId()+" con "+document.getString("cantidad")+ " existencias en BD");
              peCopia.setCantidadVacuna(document.getString("cantidad"));
              peCopia.setTipoVacuna(document.getString("tipo"));
              

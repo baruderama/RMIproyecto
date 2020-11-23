@@ -51,7 +51,7 @@ public class IPS {
                     System.out.println("NO SE ENCONTRARON EXISTENCIAS DE LA VACUNA 3");
         
         for(Peticiones p: transaccion.getP() ) {
-            System.out.println("es "+p.getTipoVacuna());
+            //System.out.println("es "+p.getTipoVacuna());
             if(p.getTipoVacuna().equals("1"))
                 vacAux1 = vac1 - Integer.parseInt(p.getCantidadVacuna());
             if(p.getTipoVacuna().equals("2"))

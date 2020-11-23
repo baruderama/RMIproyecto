@@ -130,7 +130,7 @@ public class Server implements Int {
     @Override
     public void buscarVacuna(Transaccion t) throws RemoteException {
         try {
-            System.err.println("buscarVacuna.......");
+            System.err.println("Buscando vacuna.......");
             IPS.buscarVacuna(t);
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
