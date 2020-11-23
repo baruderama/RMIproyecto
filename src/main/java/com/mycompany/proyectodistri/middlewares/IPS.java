@@ -35,7 +35,7 @@ public class IPS {
         //vac2=Integer.parseInt(FirebaseConnection.buscarVac2().getCantidadVacuna());
         //vac3=Integer.parseInt(FirebaseConnection.buscarVac3().getCantidadVacuna());
         //if(FirebaseConnection.bd==null)
-            FirebaseConnection.conectar();
+           // FirebaseConnection.conectar();
 
                 if(FirebaseConnection.buscarVac1().getCantidadVacuna()!=null)
                     vac1 = Integer.parseInt(FirebaseConnection.buscarVac1().getCantidadVacuna());

@@ -52,6 +52,7 @@ public class Server implements Int {
             
             registry.bind("Hello", stub);
             System.err.println("Server ready");
+            FirebaseConnection.conectar();
         } catch (Exception e) {
             System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
