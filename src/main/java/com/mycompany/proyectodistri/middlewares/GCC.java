@@ -33,7 +33,7 @@ public class GCC implements Serializable {
         this.peticiones = new Stack<>();
     }
 
-    public boolean distribuir(Transaccion transaccion) throws IOException, InterruptedException, ExecutionException {
+    public boolean distribuir(Transaccion transaccion) throws IOException, InterruptedException, ExecutionException, Exception {
 
         /*Transaccion transaccion = transacciones.poll();
         
@@ -55,7 +55,7 @@ public class GCC implements Serializable {
         //Int stub=Client.conectar();
         //stub.buscarVacuna(transaccion);
         Int stub=Client.conectar();
-        
+        System.out.println("Enviando a IPS de Camilo...");
         stub.buscarVacuna(transaccion);
         //ips.buscarVacuna(transaccion);
         Bloqueo.adquiere(transaccion, TipoBloqueo.ESCRITURA);
@@ -137,8 +137,8 @@ public class GCC implements Serializable {
         }
     
 
-    public static void actualizarBD(List<Peticiones> peticionesNuevas) {
-        //FirebaseConnection.conectar();
+    public static void actualizarBD(List<Peticiones> peticionesNuevas) throws IOException, Exception {
+        FirebaseConnection.conectar();
         
          
         for (Peticiones p : peticionesNuevas) {
@@ -168,5 +168,6 @@ public class GCC implements Serializable {
                 FirebaseConnection.insertarDatos("vacuna3", uid, data);
             }
         }
+        FirebaseConnection.bd.close();
     }
 }

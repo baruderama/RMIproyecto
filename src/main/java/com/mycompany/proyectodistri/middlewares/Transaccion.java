@@ -47,6 +47,8 @@ public class Transaccion extends Thread implements Serializable{
             Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ExecutionException ex) {
             Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("Inicia el hilo de la transaccion");
     }

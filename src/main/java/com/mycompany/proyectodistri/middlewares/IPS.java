@@ -29,11 +29,20 @@ public class IPS {
     }
     
     public static void buscarVacuna(Transaccion transaccion) throws IOException, InterruptedException, ExecutionException {
-        //FirebaseConnection.conectar();
+        FirebaseConnection.conectar();
         
-        vac1=Integer.parseInt(FirebaseConnection.buscarVac1().getCantidadVacuna());
-        vac2=Integer.parseInt(FirebaseConnection.buscarVac2().getCantidadVacuna());
-        vac3=Integer.parseInt(FirebaseConnection.buscarVac3().getCantidadVacuna());
+        if(FirebaseConnection.buscarVac1().getCantidadVacuna()!=null)
+            vac1 = Integer.parseInt(FirebaseConnection.buscarVac1().getCantidadVacuna());
+        else
+            System.out.println("NO SE ENCONTRARON EXISTENCIAS DE LA VACUNA 1");
+        if(FirebaseConnection.buscarVac2().getCantidadVacuna()!=null)
+            vac2=Integer.parseInt(FirebaseConnection.buscarVac2().getCantidadVacuna());
+        else
+            System.out.println("NO SE ENCONTRARON EXISTENCIAS DE LA VACUNA 2");
+        if(FirebaseConnection.buscarVac3().getCantidadVacuna()!=null)
+            vac3=Integer.parseInt(FirebaseConnection.buscarVac3().getCantidadVacuna());
+        else
+            System.out.println("NO SE ENCONTRARON EXISTENCIAS DE LA VACUNA 3");
 
         
         for(Peticiones p: transaccion.getP() ) {
@@ -47,21 +56,13 @@ public class IPS {
         }
         
         Int stub=Client.conectar();
+        
         stub.setVac1(vac1);
         stub.setVac2(vac2);
         stub.setVac3(vac3);
         stub.setVacAux1(vacAux1);
         stub.setVacAux2(vacAux2);
         stub.setVacAux3(vacAux3);
-        
-        
-        
-        
-        
-        
-        
-        //return null;    
-        
         
         
     }
