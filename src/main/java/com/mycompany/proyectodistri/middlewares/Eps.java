@@ -44,7 +44,7 @@ public class Eps implements Serializable{
     
     
     public static void obtenerPeticiones(List<Peticiones> p) throws InterruptedException, ExecutionException, RemoteException, Exception{
-        System.out.println("entra3");
+        System.out.println("Se leen las vacunas del documento");
        Peticiones peCopia= new Peticiones();
        int cantidad1=0;
        int cantidad2=0;
@@ -56,9 +56,9 @@ public class Eps implements Serializable{
                 cantidad2=Integer.parseInt(s.getCantidadVacuna())+cantidad2;
             if(s.getTipoVacuna().equals("3"))
                 cantidad3=Integer.parseInt(s.getCantidadVacuna())+cantidad3;
-            System.out.println("Typo"+s.getTipoVacuna());
+            //System.out.println("Typo"+s.getTipoVacuna());
             
-            System.out.println("Cantidad"+s.getCantidadVacuna());
+            //System.out.println("Cantidad"+s.getCantidadVacuna());
             
             
             
@@ -83,7 +83,7 @@ public class Eps implements Serializable{
          Peticiones Vac3= FirebaseConnection.buscarVac3();
          int cant3Bd=Integer.parseInt(Vac3.getCantidadVacuna());
          
-         System.out.println("valor de la bd"+Vac1.getCantidadVacuna());
+         //System.out.println("valor de la bd"+Vac1.getCantidadVacuna());
          
          if(cant1<=cant1Bd)
              conf1=true;
@@ -100,7 +100,7 @@ public class Eps implements Serializable{
              pAux.setCantidadVacuna(cant1String);
              pAux.setTipoVacuna("1");
              transaccion.add(pAux);
-             System.out.println("si llena");
+             //System.out.println("si llena");
          }else{
              Peticiones pAux=new Peticiones();
              transaccion.add(pAux);
@@ -136,7 +136,7 @@ public class Eps implements Serializable{
          //FirebaseConnection.bd.close();
          
          Int stub= Client.conectarGcc();
-         
+         System.out.println("Se envia la transaccion al Gcc");
          stub.enviarTransaccion(transaccion);
          
          }

@@ -137,8 +137,9 @@ public class FirebaseConnection extends Server {
              //String numAux=String.valueOf(document.getString("numero"));
              //int num=Integer.parseInt(numAux);
              //Peticiones peCopia= new Peticiones();
-             System.out.println("este el cod"+document.getId());
-             System.out.println("esta el cant"+document.getString("cantidad"));
+             System.out.println("tipo de vacuna "+document.getId()+" con "+document.getString("cantidad")+ " existencias en BD");
+             //System.out.println("este el cod"+document.getId());
+             //System.out.println("esta el cant"+document.getString("cantidad"));
              peCopia.setCantidadVacuna(document.getString("cantidad"));
              peCopia.setTipoVacuna(document.getString("tipo"));
              
@@ -167,7 +168,7 @@ public class FirebaseConnection extends Server {
              //int num=Integer.parseInt(numAux);
              //Peticiones peCopia= new Peticiones();
              //document.getId(),
-             
+             System.out.println("tipo de vacuna "+document.getId()+" con "+document.getString("cantidad")+ " existencias en BD");
              peCopia.setCantidadVacuna(document.getString("cantidad"));
              peCopia.setTipoVacuna(document.getString("tipo"));
              
@@ -185,7 +186,7 @@ public class FirebaseConnection extends Server {
     }
      
       public static Peticiones buscarVac3()throws InterruptedException,ExecutionException, RemoteException{
-         System.out.println("la vida");
+         //System.out.println("la vida");
          CollectionReference peti= bd.collection("vacuna3");
          ApiFuture<QuerySnapshot> querySnapshot= peti.get();
          List<Peticiones> listaP=new ArrayList<Peticiones>();
@@ -196,7 +197,7 @@ public class FirebaseConnection extends Server {
              //int num=Integer.parseInt(numAux);
              //Peticiones peCopia= new Peticiones();
              //document.getId(),
-             
+             System.out.println("tipo de vacuna "+document.getId()+" con "+document.getString("cantidad")+ " existencias en BD");
              peCopia.setCantidadVacuna(document.getString("cantidad"));
              peCopia.setTipoVacuna(document.getString("tipo"));
              

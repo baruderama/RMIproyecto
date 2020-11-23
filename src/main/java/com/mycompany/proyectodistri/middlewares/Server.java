@@ -110,7 +110,7 @@ public class Server implements Int {
         } catch (Exception ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("entra4");
+        //System.out.println("entra4");
     }
 
     @Override
