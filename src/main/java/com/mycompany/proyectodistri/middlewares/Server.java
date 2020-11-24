@@ -31,6 +31,10 @@ public class Server implements Int {
     public static int vacAux1;
     public static int vacAux2;
     public static int vacAux3;
+    public static int ips;
+    
+    
+    
      public Server() {}
 
      @Override
@@ -41,14 +45,14 @@ public class Server implements Int {
         
     public static void main(String args[]) {
         
-            System.setProperty("java.rmi.server.hostname","192.168.0.12");
+            System.setProperty("java.rmi.server.hostname","192.168.0.11");
         try {
             Server obj = new Server();
             
             Int stub = (Int) UnicastRemoteObject.exportObject(obj, 1);
 
             // Bind the remote object's stub in the registry
-            Registry registry = LocateRegistry.createRegistry(1086);
+            Registry registry = LocateRegistry.createRegistry(1087);
             
             registry.bind("Hello", stub);
             System.err.println("Server ready");
@@ -115,7 +119,7 @@ public class Server implements Int {
     @Override
     public void enviarTransaccion(List<Peticiones> peticiones) throws RemoteException {
         GCC gcc = new GCC();
-        Transaccion transaccion = new Transaccion(peticiones, gcc);
+        Transaccion transaccion = new Transaccion(peticiones, gcc, ips);
         transaccion.start();
         try {
             transaccion.join();

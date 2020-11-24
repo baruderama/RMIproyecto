@@ -20,43 +20,48 @@ public class Transaccion extends Thread implements Serializable{
     
     private List<Peticiones> p;
     private GCC gcc;
-    private int rand;
+    private  int ips;
 
-    public Transaccion(List<Peticiones> p, GCC gcc) {
+    public Transaccion(List<Peticiones> p, GCC gcc, int ips) {
         
         this.p=p;
         this.gcc = gcc;
+        this.ips=ips;
+        
     }
     
     public void run(){  
-        System.out.println("Hilo2");
+        
+        
+        System.out.println("Ejecutando Hilo: " + this.getName());
         try {
             
             while(!gcc.distribuir(this)) {
-                System.out.println("Transacción abortada!!");
+                System.out.println("¡TRANSACCION ABORTADA!");
             }
             
-            System.out.println("Transaccion exitosa.");
-            
-            
-            
-            
+            System.out.println("TRANSACCION EXITOSA");
+        
         } catch (IOException ex) {
             Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
             Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ExecutionException ex) {
             Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Inicia el hilo de la transaccion");
+    }
+
+    public int getIps() {
+        return ips;
+    }
+
+    public void setIps(int ips) {
+        this.ips = ips;
     }
 
    
-
-
-    public double getRand() {
-        return rand;
-    }
 
     public static int getMIN_PRIORITY() {
         return MIN_PRIORITY;
@@ -71,11 +76,6 @@ public class Transaccion extends Thread implements Serializable{
     }
 
    
-
-
-    public void setRand(int rand) {
-        this.rand = rand;
-    }
 
     public List<Peticiones> getP() {
         return p;
