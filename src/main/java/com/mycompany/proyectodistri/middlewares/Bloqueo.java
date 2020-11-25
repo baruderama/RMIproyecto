@@ -22,6 +22,7 @@ public class Bloqueo {
     public static synchronized void adquiere(Transaccion transaccion, TipoBloqueo tipoBloqueoRecibido) {
         while(tipoBloqueo == TipoBloqueo.ESCRITURA) {
             try {
+                System.out.println(transaccion.getName());
                 transaccion.wait();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Bloqueo.class.getName()).log(Level.SEVERE, null, ex);

@@ -31,6 +31,9 @@ public class Server implements Int {
     public static int vacAux1;
     public static int vacAux2;
     public static int vacAux3;
+    private static int ips=0;
+    private static GCC gcc = new GCC();
+    private static String confir;
      public Server() {}
 
      @Override
@@ -110,8 +113,13 @@ public class Server implements Int {
 
     @Override
     public void enviarTransaccion(List<Peticiones> peticiones) throws RemoteException {
-        GCC gcc = new GCC();
-        Transaccion transaccion = new Transaccion(peticiones, gcc);
+        //GCC gcc = new GCC();
+        if(ips==0){
+            ips=1;
+        }else{
+            ips=0;
+        }
+        Transaccion transaccion = new Transaccion(peticiones, gcc, ips);
         transaccion.start();
         try {
             transaccion.join();
@@ -194,6 +202,22 @@ public class Server implements Int {
     public  void setVacAux3(int vacAux3) {
         Server.vacAux3 = vacAux3;
     }
+
+    @Override
+    public  String getConfir() {
+        return confir;
+    }
+
+    @Override
+    public  void setConfir(String confir) {
+        Server.confir = confir;
+    }
+
+    @Override
+    public void sentConfirm(String confir) throws RemoteException {
+        Eps.confirmacion(confir); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
     
     

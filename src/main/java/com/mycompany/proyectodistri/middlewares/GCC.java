@@ -27,7 +27,6 @@ public class GCC implements Serializable {
 
     Stack<List<Peticiones>> peticiones;
     IPS ips;
-    int rand;
 
     public GCC() {
         this.peticiones = new Stack<>();
@@ -35,22 +34,23 @@ public class GCC implements Serializable {
 
     public boolean distribuir(Transaccion transaccion) throws IOException, InterruptedException, ExecutionException, Exception {
 
-        rand = (int) Math.random() * 2;
-        String nombre = null;
-
-        if (rand == 0) {
-            nombre = "ips1";
+        //int ID = (int) transaccion.getId();
+        //System.out.println(2);
+        //String nombre = null;
+        Int stub;
+        System.out.println("BALANCEADOR DE CARGA "+transaccion.getName()+":");
+        if (transaccion.getIps() == 0) {
+            stub = Client.conectar();
+            System.out.println("Enviando transaccion a IPS 1... "+transaccion.getName());
+            stub.buscarVacuna(transaccion);
+        } else {
+            stub = Client.conectarIPS2();
+            System.out.println("Enviando transaccion a IPS 2... "+transaccion.getName());
+            stub.buscarVacuna(transaccion);
         }
-        if (rand == 1) {
-            nombre = "ips2";
-        }
-
-        Int stub = Client.conectar();
-        System.out.println("Enviando transaccion a IPS...");
-        stub.buscarVacuna(transaccion);
 
         Bloqueo.adquiere(transaccion, TipoBloqueo.ESCRITURA);
-        System.out.println("Se bloquea la IPS de destino...");
+        System.out.println("Se bloquea la IPS de destino... "+transaccion.getName());
         List<Peticiones> peticionesNuevas = new ArrayList<>();
 
         if (peticiones.empty()) {
@@ -59,53 +59,58 @@ public class GCC implements Serializable {
             peticion.setCantidadVacuna(String.valueOf(stub.getVacAux1()));
             peticion.setTipoVacuna("1");
             peticionesNuevas.add(peticion);
-            System.out.println("lista" + peticionesNuevas.get(0).getTipoVacuna());
+            //System.out.println("lista" + peticionesNuevas.get(0).getTipoVacuna()+' '+transaccion.getName());
 
             Peticiones peticion2 = new Peticiones();
             peticion2.setCantidadVacuna(String.valueOf(stub.getVacAux2()));
             peticion2.setTipoVacuna("2");
             peticionesNuevas.add(peticion2);
-            System.out.println("lista" + peticionesNuevas.get(1).getTipoVacuna());
+            //System.out.println("lista" + peticionesNuevas.get(1).getTipoVacuna()+""+transaccion.getName());
 
             Peticiones peticion3 = new Peticiones();
             peticion3.setCantidadVacuna(String.valueOf(stub.getVacAux3()));
             peticion3.setTipoVacuna("3");
             peticionesNuevas.add(peticion3);
-            System.out.println("lista" + peticionesNuevas.get(2).getTipoVacuna());
+            //System.out.println("lista" + peticionesNuevas.get(2).getTipoVacuna()+""+transaccion.getName());
 
         } else {
-            System.out.println("Preparando COMMIT...");
+            System.out.println("VERIFICACIÓN HACIA ATRÁS " + transaccion.getName() + ":");
             for (Peticiones p : peticiones.peek()) {
+                
                 if (p.getTipoVacuna().equals("1")) {
+                
                     if (Integer.parseInt(p.getCantidadVacuna()) == stub.getVac1()) {
-                        System.out.println("Vacuna 1 OK");
+                        System.out.println("Vacuna 1 TRUE");
                         Peticiones peticion = new Peticiones();
                         peticion.setCantidadVacuna(String.valueOf(stub.getVacAux1()));
                         peticion.setTipoVacuna("1");
                         peticionesNuevas.add(peticion);
                     } else {
+                        System.err.println("Vacuna 1 FALSE "+transaccion.getName());
                         return false;
                     }
                 }
                 if (p.getTipoVacuna().equals("2")) {
                     if (Integer.parseInt(p.getCantidadVacuna()) == stub.getVac2()) {
-                        System.out.println("Vacuna 2 OK");
+                        System.out.println("Vacuna 2 TRUE");
                         Peticiones peticion = new Peticiones();
                         peticion.setCantidadVacuna(String.valueOf(stub.getVacAux2()));
                         peticion.setTipoVacuna("2");
                         peticionesNuevas.add(peticion);
                     } else {
+                        System.err.println("Vacuna 2 FALSE "+transaccion.getName());
                         return false;
                     }
                 }
                 if (p.getTipoVacuna().equals("3")) {
                     if (Integer.parseInt(p.getCantidadVacuna()) == stub.getVac3()) {
-                        System.out.println("Vacuna 3 OK");
+                        System.out.println("Vacuna 3 TRUE");
                         Peticiones peticion = new Peticiones();
                         peticion.setCantidadVacuna(String.valueOf(stub.getVacAux3()));
                         peticion.setTipoVacuna("3");
                         peticionesNuevas.add(peticion);
                     } else {
+                        System.err.println("Vacuna 3 FALSE "+transaccion.getName());
                         return false;
                     }
                 }
@@ -114,8 +119,8 @@ public class GCC implements Serializable {
         }
         peticiones.push(peticionesNuevas);
         actualizarBD(peticionesNuevas);
-        System.out.println("COMMIT EXITOSO");
-        
+        System.out.println("COMMIT EXITOSO "+transaccion.getName());
+
         return true;
     }
 

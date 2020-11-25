@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.mycompany.proyectodistri.middlewares;
+
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -15,7 +16,9 @@ import java.util.Scanner;
  * @author baru
  */
 public class Client {
-    private Client() {}
+
+    private Client() {
+    }
 
     public static void main(String[] args) {
 
@@ -27,7 +30,7 @@ public class Client {
             Registry registry;
             registry = LocateRegistry.getRegistry(1086);
             Int stub = (Int) registry.lookup("Hello");
-            
+
             /*
             String response = stub.sayHello();
             System.out.println("pon tu nombre");
@@ -37,21 +40,53 @@ public class Client {
             Pruebita response2= stub.sacarPrueba(nombre,num);
             System.out.println("response: " + response);
             System.out.println("response: " + response2.getNombre()+" "+response2.getNum());
-            */
-
+             */
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
         }
     }
-    
-    public static Int conectar(){
-        
-        try{
+
+    public static Int conectar() {
+
+        try {
             Registry registry;
 
-            registry = LocateRegistry.getRegistry("192.168.0.12",1086);//REMOTO
-           // registry = LocateRegistry.getRegistry(1083); //LOCAL
+            registry = LocateRegistry.getRegistry("192.168.0.12", 1086);//REMOTO
+            // registry = LocateRegistry.getRegistry(1083); //LOCAL
+            Int stub = (Int) registry.lookup("Hello");
+            //System.out.println("Enviando a IPS de Sebastián...");
+            return stub;
+        } catch (Exception e) {
+            System.err.println("¡LA IPS 1 ESTÁ CAÍDA! Redireccionando a la IPS 2... ");
+            return Client.conectarIPS2();
+        }
+    }
+
+    public static Int conectarIPS2() {
+
+        try {
+            Registry registry;
+
+            registry = LocateRegistry.getRegistry("192.168.0.11", 1087);//REMOTO
+            // registry = LocateRegistry.getRegistry(1083); //LOCAL
+            Int stub = (Int) registry.lookup("Hello");
+            //System.out.println("Enviando a IPS de Sebastián...");
+            return stub;
+        } catch (Exception e) {
+            System.err.println("¡LA IPS 2 ESTÁ CAÍDA! Redireccionando a la IPS 1...");
+            return Client.conectar();
+        }
+        //return null;
+    }
+
+    public static Int conectarEPS() {
+
+        try {
+            Registry registry;
+
+            //registry = LocateRegistry.getRegistry("192.168.0.11",1087);//REMOTO
+            registry = LocateRegistry.getRegistry(1083); //LOCAL
             Int stub = (Int) registry.lookup("Hello");
             //System.out.println("Enviando a IPS de Sebastián...");
             return stub;
@@ -61,14 +96,12 @@ public class Client {
         }
         return null;
     }
-    
-    public static List<Pruebita> buscarPruebita() throws RemoteException{
-        
-        Int stub= conectar();
+
+    public static List<Pruebita> buscarPruebita() throws RemoteException {
+
+        Int stub = conectar();
         System.out.println("hola");
         return stub.buscarPruebita();
     }
-    
-   
-    
+
 }

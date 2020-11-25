@@ -20,23 +20,31 @@ public class Transaccion extends Thread implements Serializable{
     
     private List<Peticiones> p;
     private GCC gcc;
-    private int rand;
+    private  int ips;
 
-    public Transaccion(List<Peticiones> p, GCC gcc) {
+    public Transaccion(List<Peticiones> p, GCC gcc, int ips) {
         
         this.p=p;
         this.gcc = gcc;
+        this.ips=ips;
+        
     }
     
     public void run(){  
+        
+        Int stub = Client.conectarEPS();
         System.out.println("Ejecutando Hilo: " + this.getName());
         try {
             
             while(!gcc.distribuir(this)) {
                 System.out.println("¡TRANSACCION ABORTADA!");
+                stub.sentConfirm("TRANSACCION ABORTADA!");
             }
             
             System.out.println("TRANSACCION EXITOSA");
+            
+            stub.sentConfirm("TRANSACCION EXITOSA");
+            
         
         } catch (IOException ex) {
             Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,12 +57,15 @@ public class Transaccion extends Thread implements Serializable{
         }
     }
 
-   
-
-
-    public double getRand() {
-        return rand;
+    public int getIps() {
+        return ips;
     }
+
+    public void setIps(int ips) {
+        this.ips = ips;
+    }
+
+   
 
     public static int getMIN_PRIORITY() {
         return MIN_PRIORITY;
@@ -69,11 +80,6 @@ public class Transaccion extends Thread implements Serializable{
     }
 
    
-
-
-    public void setRand(int rand) {
-        this.rand = rand;
-    }
 
     public List<Peticiones> getP() {
         return p;

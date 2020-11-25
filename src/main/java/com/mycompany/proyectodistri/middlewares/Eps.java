@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -137,5 +138,10 @@ public class Eps implements Serializable{
          stub.enviarTransaccion(transaccion);
          System.out.println("Se recibio una transaccion del cliente...");
          }
+    
+    public static void confirmacion(String mensaje){
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
          
+    
 }

@@ -49,8 +49,11 @@ public interface Int extends Remote{
     
     public void setVacAux3(int vacAux3)throws RemoteException;
     
+    public String getConfir()throws RemoteException;
     
+    public  void setConfir(String confir)throws RemoteException;
     
+    public void sentConfirm(String confir)throws RemoteException;
     
     public List<Eps> getlistaEps() throws RemoteException;
     
