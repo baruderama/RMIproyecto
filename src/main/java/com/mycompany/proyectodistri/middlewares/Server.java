@@ -208,7 +208,10 @@ public class Server implements Int {
     }
     
     
-    
+    @Override
+    public void sentConfirm(String confir) throws RemoteException {
+        Eps.confirmacion(confir); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

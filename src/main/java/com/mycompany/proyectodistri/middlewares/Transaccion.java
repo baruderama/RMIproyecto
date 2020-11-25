@@ -32,15 +32,18 @@ public class Transaccion extends Thread implements Serializable{
     
     public void run(){  
         
-        
+        Int stub = Client.conectarEPS();
         System.out.println("Ejecutando Hilo: " + this.getName());
         try {
             
             while(!gcc.distribuir(this)) {
                 System.out.println("¡TRANSACCION ABORTADA!");
+                stub.sentConfirm("TRANSACCION ABORTADA");
             }
             
             System.out.println("TRANSACCION EXITOSA");
+            //Int stub = Client.conectarEPS();
+            stub.sentConfirm("TRANSACCION EXITOSA");
         
         } catch (IOException ex) {
             Logger.getLogger(Transaccion.class.getName()).log(Level.SEVERE, null, ex);

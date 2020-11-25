@@ -103,6 +103,21 @@ public class Client {
         }
         return null;
     }
+    
+    public static Int conectarEPS(){
+         try{
+            Registry registry;
+
+            registry = LocateRegistry.getRegistry("192.168.0.16",1084);//REMOTO
+            //registry = LocateRegistry.getRegistry(1083); //LOCAL
+            Int stub = (Int) registry.lookup("Hello");
+            return stub;
+        } catch (Exception e) {
+            System.err.println("Client exception: " + e.toString());
+            e.printStackTrace();
+        }
+        return null;
+    }
    
     
 }
