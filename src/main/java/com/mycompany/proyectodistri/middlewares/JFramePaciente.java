@@ -58,6 +58,7 @@ public class JFramePaciente extends javax.swing.JFrame {
         jPasswordField2 = new javax.swing.JPasswordField();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanelRegistro = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -107,6 +108,13 @@ public class JFramePaciente extends javax.swing.JFrame {
 
         jLabel8.setText("EPS");
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelSesionLayout = new javax.swing.GroupLayout(jPanelSesion);
         jPanelSesion.setLayout(jPanelSesionLayout);
         jPanelSesionLayout.setHorizontalGroup(
@@ -133,7 +141,10 @@ public class JFramePaciente extends javax.swing.JFrame {
                                 .addGap(44, 44, 44))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSesionLayout.createSequentialGroup()
                                 .addComponent(jLabel8)
-                                .addGap(81, 81, 81))))))
+                                .addGap(81, 81, 81))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSesionLayout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(64, 64, 64))))))
         );
         jPanelSesionLayout.setVerticalGroup(
             jPanelSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,9 +163,15 @@ public class JFramePaciente extends javax.swing.JFrame {
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonAutenticar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGroup(jPanelSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelSesionLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonAutenticar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(26, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSesionLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(37, 37, 37))))
         );
 
         jTabbedPanePaciente.addTab("Iniciar Sesión", jPanelSesion);
@@ -280,7 +297,7 @@ public class JFramePaciente extends javax.swing.JFrame {
         
         Int stub=Client.conectar();
         try {
-            p=LectorTexto.readFile();
+            p=LectorTexto.readFile("eps2");
             
             stub.entregarListaPeticiones(p);
             System.out.println("entra1");
@@ -343,6 +360,23 @@ public class JFramePaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        List<Peticiones> p= new ArrayList<Peticiones>();
+        //Paciente paciente = new Paciente(usuario, contrasena);
+        
+        
+        Int stub=Client.conectar();
+        try {
+            p=LectorTexto.readFile("eps3");
+            
+            stub.entregarListaPeticiones(p);
+            System.out.println("entra1");
+        } catch (IOException ex) {
+            Logger.getLogger(JFramePaciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -384,6 +418,7 @@ public class JFramePaciente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAutenticar;
     private javax.swing.JButton jButtonAutenticar1;
     private javax.swing.JComboBox<String> jComboBox1;

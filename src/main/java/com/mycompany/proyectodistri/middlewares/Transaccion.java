@@ -29,14 +29,19 @@ public class Transaccion extends Thread implements Serializable{
     }
     
     public void run(){  
+        Int stub = Client.conectarEPS();
         System.out.println("Hilo2");
         try {
             
             while(!gcc.distribuir(this)) {
                 System.out.println("Transacción abortada!!");
+                stub.sentConfirm("TRANSACCION ABORTADA");
             }
             
+            
             System.out.println("Transaccion exitosa.");
+            //Int stub = Client.conectarEPS();
+            stub.sentConfirm("TRANSACCION EXITOSA");
             
             
             

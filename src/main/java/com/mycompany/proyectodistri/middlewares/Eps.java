@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -102,7 +103,10 @@ public class Eps implements Serializable{
              transaccion.add(pAux);
              //System.out.println("si llena");
          }else{
+             System.out.println("FALTA DE EXISTENCIAS, SE INICIALIZA EN CERO");
              Peticiones pAux=new Peticiones();
+             pAux.setCantidadVacuna("0");
+             pAux.setTipoVacuna("1");
              transaccion.add(pAux);
              
          }
@@ -113,7 +117,10 @@ public class Eps implements Serializable{
              pAux.setTipoVacuna("2");
              transaccion.add(pAux);
          }else{
+             System.out.println("FALTA DE EXISTENCIAS, SE INICIALIZA EN CERO");
              Peticiones pAux=new Peticiones();
+             pAux.setCantidadVacuna("0");
+             pAux.setTipoVacuna("2");
              transaccion.add(pAux);
          }
          
@@ -123,7 +130,10 @@ public class Eps implements Serializable{
              pAux.setTipoVacuna("3");
              transaccion.add(pAux);
          }else{
+             System.out.println("FALTA DE EXISTENCIAS, SE INICIALIZA EN CERO");
              Peticiones pAux=new Peticiones();
+             pAux.setCantidadVacuna("0");
+             pAux.setTipoVacuna("3");
              transaccion.add(pAux);
          }
          
@@ -140,5 +150,9 @@ public class Eps implements Serializable{
          stub.enviarTransaccion(transaccion);
          
          }
+    
+    public static void confirmacion(String mensaje){
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
          
 }

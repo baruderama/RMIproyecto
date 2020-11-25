@@ -246,7 +246,7 @@ public class JFramePrueba extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         Map<String,Object> data = new HashMap<>();
-        data.put("cantidad","1000");
+        data.put("cantidad","10");
         data.put("tipo","3");
         String uid= "VAC3";
         FirebaseConnection.insertarDatos("vacuna3", uid, data);

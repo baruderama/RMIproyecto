@@ -20,10 +20,10 @@ import java.util.StringTokenizer;
 public class LectorTexto {
     
      
-     public static List<Peticiones> readFile() throws IOException{
+     public static List<Peticiones> readFile(String doc) throws IOException{
          List<Peticiones> peti=new ArrayList<Peticiones>();
          try {
-      File myObj = new File("eps1");
+      File myObj = new File(doc);
       Scanner myReader = new Scanner(myObj);
       while (myReader.hasNextLine()) {
           

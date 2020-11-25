@@ -60,6 +60,7 @@ public interface Int extends Remote{
     
     public void buscarVacuna(Transaccion transaccion)throws RemoteException;
     
+    public void sentConfirm(String confir)throws RemoteException;
     
     
     //public boolean pacienteGuardar(Paciente paciente);
